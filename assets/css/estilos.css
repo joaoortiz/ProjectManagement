@@ -1,0 +1,19 @@
+.btn-add{
+    background-color: #FFFFFF;
+    color:#013059;
+    border-radius:6px;
+    width:30px;
+    height:30px;
+    padding-top: 1px;
+    padding-left:7px;    
+}
+
+.btn-fechar{
+    background-color: #FFFFFF;
+    color:#013059;
+    border-color:#013059;
+    border-radius:6px;
+    border-width:1px;
+    width:120px;
+    height:30px;    
+}
