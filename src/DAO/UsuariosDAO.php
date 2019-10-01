@@ -102,7 +102,7 @@ class UsuariosDAO {
             $sqlVerEquip = "Select * from Equipes where emailUsuario_EQUIPE like '$tmpEmail' and codigoProjeto_EQUIPE = '$tmpProjeto'";
             $rsVerEquip = mysqli_query($vConn, $sqlVerEquip) or die(mysqli_error($vConn));
 
-            if (mysqli_num_rows($rsVerifica) > 0) {
+            if (mysqli_num_rows($rsVerEquip) > 0) {
                 return -1;
             } else {
                 $sqlAdd = "Insert into Equipes(codigoProjeto_EQUIPE, emailUsuario_EQUIPE, codigoPermissao_EQUIPE) values (";

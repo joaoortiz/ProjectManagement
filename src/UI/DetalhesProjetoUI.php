@@ -2,7 +2,9 @@
 
 <?php
 require_once "../Model/Projetos.php";
+require_once "../Model/Usuarios.php";
 require_once "../DAO/ProjetosDAO.php";
+require_once "../DAO/UsuariosDAO.php";
 
 session_start();
 
@@ -35,7 +37,7 @@ $fim = $tmpProjeto->getFim();
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="../../assets/css/cores.css">
         <link rel="stylesheet" href="../../assets/css/estilos.css">
-        
+
     </head>
     <body>
 
@@ -72,14 +74,27 @@ $fim = $tmpProjeto->getFim();
                     </div>
                     <div class="card" style="margin-top: 10px;">
                         <div class="card-header bg-primary-shadow text-white">
-                           Integrantes
-                                <a href="#" class="btn btn-add float-right" onclick="document.getElementById('DivAdd').style.display='block';">
-                                    <h5>+</h5>
-                                </a>
-                           
+                            Integrantes
+                            <a href="#" class="btn btn-add float-right" onclick="document.getElementById('DivAdd').style.display = 'block';">
+                                <h5>+</h5>
+                            </a>
+
                         </div>
                         <div class="card-body text-center" style="min-height:220px;height:auto;">
-                            (integrantes)
+                            <?php
+                            $itens = UsuariosDAO::listarIntegrantes($proj);
+
+                            if (count($itens) == 0) {
+                                ?>
+                                Sem integrantes
+                                <?php
+                            } else {
+                                for($i=0; $i<count($itens);$i++){?>
+                                <?=$itens[$i]->getNome();?><br>
+                                    <?php        
+                                }
+                            }
+                            ?>
 
                         </div>
                     </div>
@@ -123,7 +138,7 @@ $fim = $tmpProjeto->getFim();
                                     Tarefas
                                 </div>
                                 <div class="col-md-1">
-                                    <a class="btn btn-add" href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigo();?>">
+                                    <a class="btn btn-add" href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>">
                                         <h5>+</h5>
                                     </a>
                                 </div>
@@ -145,9 +160,9 @@ $fim = $tmpProjeto->getFim();
         <!-- ********************Div Externa **************-->
 
         <div id="DivAdd">
-            
+
             <?php
-                include "FormAdicionaUsuarioUI.php";
+            include "FormAdicionaUsuarioUI.php";
             ?>
         </div>
 
