@@ -67,6 +67,20 @@ if($acao == 1){
     session_destroy();
     echo "<script>location.href='../../index.php';</script>";//redirecionando
     
+}else if($acao == 4){
+   //addUsuario
+    $email = $_GET['HTML_email'];
+    $cod = $_GET['cod'];
+    $statusAdd = UsuariosDAO::adicionarIntegrante($cod, $email);
+    
+    if($statusAdd == 0){
+        echo "<script>alert('Usuário não cadastrado no sistema.');</script>";
+    }else if($statusAdd == -1){
+        echo "<script>alert('O usuário informado já pertence à equipe.');</script>";
+    }else{
+        echo "<script>alert('Integrante adicionado ao projeto.');</script>";
+    }
+    echo "<script>location.href='../UI/DetalhesProjetoUI.php?cod=".$cod."';</script>";//redirecionando
 }
 
 ?>
