@@ -24,7 +24,7 @@ $itens = TarefasDAO::listarTarefas(0, $proj);
                         
                         <tr>
                             <td>
-                                <a href="DetalhesTarefaUI.php?cod=<?=$itens[$i]->getCodigo();?>">
+                                <a href="DetalhesTarefaUI.php?proj=<?=$proj;?>&tar=<?=$itens[$i]->getCodigo();?>">
                                     <?=$itens[$i]->getNome();?>
                                 </a>
                             </td>

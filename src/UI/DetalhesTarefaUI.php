@@ -2,13 +2,18 @@
 
 <?php
 require_once "../Model/Projetos.php";
-require_once "../Model/Tarefas.php";
 require_once "../DAO/ProjetosDAO.php";
+require_once "../Model/Tarefas.php";
 require_once "../DAO/TarefasDAO.php";
+require_once "../Model/Usuarios.php";
+require_once "../DAO/UsuariosDAO.php";
 session_start();
 
-$tar = $_GET['cod'];
+$proj = $_GET['proj'];
+$tar = $_GET['tar'];
+$tmpProjeto = ProjetosDAO::consultarProjeto($proj);
 $tmpTarefa = TarefasDAO::consultarTarefa($tar);
+$tmpUsuario = UsuariosDAO::consultarUsuario($tmpTarefa->getEmailUsuario());
 
 if ($tmpTarefa->getStatus() == 0) {
     $status = "Incompleta";
@@ -27,7 +32,7 @@ if ($tmpTarefa->getStatus() == 0) {
         <div class="container" style="margin-top: 10px;">
             <div class="card">
                 <div class="card-header bg-primary-dark text-white">
-                    <h5>NOME DO PROJETO</h5>
+                    <h5><?= $tmpProjeto->getNome(); ?></h5>
                 </div>
                 <div class="card-body">
 
@@ -45,10 +50,26 @@ if ($tmpTarefa->getStatus() == 0) {
                         <div class="col-md-5">
                             <div class="card" style="margin-top:15px;">
                                 <div class="card-header bg-primary-light text-white">
-                                    Mensagem
+                                    Enviar mensagem ao responsável
                                 </div>
                                 <div class="card-body">
-                                    FORM                            
+                                    <form>
+                                        <div class="form-group">
+                                            <h5><?= $tmpUsuario->getNome(); ?></h5>
+                                            <?= $tmpTarefa->getEmailUsuario(); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control">                                            
+                                            </textarea>
+                                        </div>
+                                        <div class="">
+                                            <button type="submit" class="btn bg-primary-light form-control text-white">Enviar E-mail</button>
+                                            <hr>
+                                            <a href="https://web.whatsapp.com/send?phone=<?=$tmpUsuario->getTelefone();?>" target="_blank" class="btn btn-success form-control text-white">WhatsApp</a>
+
+
+                                        </div>
+                                    </form>                            
                                 </div>                               
                             </div>
                         </div>
@@ -59,12 +80,12 @@ if ($tmpTarefa->getStatus() == 0) {
                                 </div>
                                 <div class="card-body">
                                     LISTA DE ARQUIVOS   
-                                    
+
                                     <form>
                                         <div class="form-group">
                                             <input type="file" class="form-control-sm">
                                         </div>
-                                            
+
                                     </form>
                                 </div>                               
                             </div>
