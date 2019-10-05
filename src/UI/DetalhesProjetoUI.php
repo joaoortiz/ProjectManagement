@@ -35,6 +35,7 @@ $fim = $tmpProjeto->getFim();
         </style>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/cores.css">
         <link rel="stylesheet" href="../../assets/css/estilos.css">
 
@@ -46,9 +47,15 @@ $fim = $tmpProjeto->getFim();
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header bg-primary-dark text-white">
-                            <h5> <?= $tmpProjeto->getNome(); ?> </h5>                       
+                            <h5><i class="fa fa-file-text fa-lg fa-fw text-white"></i>
+                                <?= $tmpProjeto->getNome(); ?> </h5>                       
                         </div>
                         <div class="card-body">
+                            <h5>
+                                <i class="fa fa-user fa-fw fa-lg"></i>
+                                Coordenador: <?= $tmpProjeto->getEmailUsuario(); ?>
+                            </h5>
+                            <br>
                             <?= $tmpProjeto->getDescricao(); ?>
                         </div>                               
                     </div>
@@ -59,6 +66,7 @@ $fim = $tmpProjeto->getFim();
 
                     <div class="card">
                         <div class="card-header bg-primary-shadow text-white">
+                            <i class="fa fa-spinner fa-lg fa-fw text-white"></i>
                             Concluído
                         </div>
                         <div class="card-body text-center" style="height:120px;line-height:80px;">
@@ -73,12 +81,18 @@ $fim = $tmpProjeto->getFim();
                         </div>
                     </div>
                     <div class="card" style="margin-top: 10px;">
-                        <div class="card-header bg-primary-shadow text-white">
-                            Integrantes
-                            <a href="#" class="btn btn-add float-right" onclick="document.getElementById('DivAdd').style.display = 'block';">
-                                <h5>+</h5>
-                            </a>
-
+                        <div class="card-header bg-primary-shadow text-white">  
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <i class="fa fa-users fa-lg fa-fw text-white"></i>
+                                    Integrantes
+                                </div>
+                                <div class="col-md-2" style="padding-top:3px;">
+                                    <a href="#" class="float-right" onclick="document.getElementById('DivAdd').style.display = 'block';">
+                                        <i class="fa fa-plus-square fa-lg fa-fw text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body text-center" style="min-height:220px;height:auto;">
                             <?php
@@ -89,9 +103,10 @@ $fim = $tmpProjeto->getFim();
                                 Sem integrantes
                                 <?php
                             } else {
-                                for($i=0; $i<count($itens);$i++){?>
-                                <?=$itens[$i]->getNome();?><br>
-                                    <?php        
+                                for ($i = 0; $i < count($itens); $i++) {
+                                    ?>
+                                    <?= $itens[$i]->getNome(); ?><br>
+                                    <?php
                                 }
                             }
                             ?>
@@ -135,11 +150,12 @@ $fim = $tmpProjeto->getFim();
                         <div class="card-header bg-primary-shadow text-white">
                             <div class="row">
                                 <div class="col-md-11">
+                                    <i class="fa fa-list fa-lg fa-fw text-white"></i>
                                     Tarefas
                                 </div>
-                                <div class="col-md-1">
-                                    <a class="btn btn-add" href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>">
-                                        <h5>+</h5>
+                                <div class="col-md-1" style="padding-top:3px;">
+                                    <a href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>">
+                                        <i class="fa fa-plus-square fa-lg fa-fw text-white"></i>
                                     </a>
                                 </div>
                             </div>

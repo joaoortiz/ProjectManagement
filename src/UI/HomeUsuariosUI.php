@@ -8,6 +8,7 @@ session_start();
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/cores.css">
     </head>
     
@@ -31,9 +32,12 @@ session_start();
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body" style="height:65px;padding-top:10px;">
-                            <a href="FormCadastroProjetoUI.php" class="btn bg-primary-light text-white" style="width:100%;height: 45px;">
-                                + Criar Novo Projeto
+                            <button class="btn bg-primary-light" style="width:100%;height:45px;">
+                                <i class="fa fa-plus-square fa-lg fa-fw text-white"></i>
+                            <a href="FormCadastroProjetoUI.php" class="text-white">                                
+                                Criar Novo Projeto
                             </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -53,7 +57,9 @@ session_start();
                             <?=$_SESSION['telefone'];?><br>
                             
                           <div class="dropup float-right">
+                              
                                 <a href="#" class="btn bg-primary-light text-white dropdown-toggle" style="height:45px;width:300px;"id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bars fa-lg fa-fw text-white"></i>
                                     Opções
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-left" style="width:300px;">
@@ -74,7 +80,10 @@ session_start();
                     <div class="card">
                         <div class="card-header bg-primary-shadow text-white" style="height:50px;">
                             <h5>
-                                <a href="ListaProjetosUI.php" class="text-white">Projetos</a>
+                                <a href="ListaProjetosUI.php" class="text-white">
+                                    <i class="fa fa-file-text fa-lg fa-fw text-white"></i>
+                                    Projetos
+                                </a>
                             </h5>
                         </div>
                         <div class="card-body text-center" style="height:200px;line-height:120px;">
@@ -88,7 +97,10 @@ session_start();
                     <div class="card">
                         <div class="card-header bg-primary-shadow" style="height:50px;">
                             <h5>
-                                <a href="" class="text-white">Tarefas</a>
+                                <a href="" class="text-white">
+                                    <i class="fa fa-list fa-lg fa-fw text-white"></i>
+                                    Tarefas
+                                </a>
                             </h5>
                         </div>
                         <div class="card-body text-center" style="height:200px;line-height:120px;">
@@ -102,7 +114,10 @@ session_start();
                     <div class="card">
                         <div class="card-header bg-primary-shadow" style="height:50px;">
                             <h5>
-                                <a href="" class="text-white">Contatos</a>
+                                <a href="" class="text-white">
+                                    <i class="fa fa-users fa-lg fa-fw text-white"></i>
+                                    Contatos
+                                </a>
                             </h5>
                         </div>
                         <div class="card-body text-center" style="height:200px;line-height:120px;">

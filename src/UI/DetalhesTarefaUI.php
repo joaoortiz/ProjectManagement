@@ -25,6 +25,7 @@ if ($tmpTarefa->getStatus() == 0) {
     <head>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/cores.css">
 
     </head>
@@ -32,13 +33,16 @@ if ($tmpTarefa->getStatus() == 0) {
         <div class="container" style="margin-top: 10px;">
             <div class="card">
                 <div class="card-header bg-primary-dark text-white">
-                    <h5><?= $tmpProjeto->getNome(); ?></h5>
+                    
+                    <h5><i class="fa fa-file-text fa-fw text-white"></i> <?= $tmpProjeto->getNome(); ?></h5>
                 </div>
                 <div class="card-body">
 
                     <div class="card">
                         <div class="card-header bg-primary-shadow text-white">
-                            <h5> <?= $tmpTarefa->getNome(); ?> - <?= ProjetosDAO::corrigirData($tmpTarefa->getData()); ?> </h5>                       
+                            <h5> 
+                                <i class="fa fa-list fa-fw fa-lg text-white"></i>
+                                <?= $tmpTarefa->getNome(); ?> - <?= ProjetosDAO::corrigirData($tmpTarefa->getData()); ?> </h5>                       
                         </div>
                         <div class="card-body">
 
@@ -50,6 +54,7 @@ if ($tmpTarefa->getStatus() == 0) {
                         <div class="col-md-5">
                             <div class="card" style="margin-top:15px;">
                                 <div class="card-header bg-primary-light text-white">
+                                    <i class="fa fa-commenting-o fa-fw fa-lg text-white"></i>
                                     Enviar mensagem ao responsável
                                 </div>
                                 <div class="card-body">
@@ -63,9 +68,15 @@ if ($tmpTarefa->getStatus() == 0) {
                                             </textarea>
                                         </div>
                                         <div class="">
-                                            <button type="submit" class="btn bg-primary-light form-control text-white">Enviar E-mail</button>
+                                            <button type="submit" class="btn bg-primary-light form-control text-white">
+                                                <i class="fa fa-envelope fa-fw text-white"></i>
+                                                Enviar E-mail
+                                            </button>
                                             <hr>
-                                            <a href="https://web.whatsapp.com/send?phone=<?=$tmpUsuario->getTelefone();?>" target="_blank" class="btn btn-success form-control text-white">WhatsApp</a>
+                                            <a href="https://web.whatsapp.com/send?phone=<?= $tmpUsuario->getTelefone(); ?>" target="_blank" class="btn btn-success form-control text-white">
+                                                <i class="fa fa-whatsapp fa-lg fa-fw text-white"></i>
+                                                WhatsApp
+                                            </a>
 
 
                                         </div>
@@ -76,6 +87,7 @@ if ($tmpTarefa->getStatus() == 0) {
                         <div class="col-md-7">
                             <div class="card" style="margin-top:15px;">
                                 <div class="card-header bg-primary-light text-white">
+                                    <i class="fa fa-file fa-fw fa-lg text-white"></i>
                                     Arquivos
                                 </div>
                                 <div class="card-body">
