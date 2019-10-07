@@ -1,4 +1,6 @@
 <?php
+require_once "../DAO/UsuariosDAO.php";
+require_once "../Model/Usuarios.php";
 require_once "../DAO/ProjetosDAO.php";
 require_once "../DAO/TarefasDAO.php";
 require_once "../Model/Tarefas.php";
@@ -30,8 +32,13 @@ $itens = TarefasDAO::listarTarefas(0, $proj);
                             </td>
                                                         
                             <td><?=ProjetosDAO::corrigirData($itens[$i]->getData());?></td>
-                                                        
-                            <td><?=$itens[$i]->getEmailUsuario();?></td>
+                            
+                                <?php
+                                    $user = $itens[$i]->getEmailUsuario();
+                                    $tmpUsuario = UsuariosDAO::consultarUsuario($user);
+                                    $nome = $tmpUsuario->getNome();
+                                ?>
+                            <td><?=$nome;?></td>
                             <td>                                
                                 <?php
                                     if($itens[$i]->getStatus() == 0)

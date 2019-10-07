@@ -56,9 +56,13 @@ if($acao == 1){
     $tmpUsuario->setSenha($senha);
     $tmpUsuario->setTelefone($telefone);
     
-    UsuariosDAO::cadastrarUsuario($tmpUsuario);//cadastrando
+    $statusCad =UsuariosDAO::cadastrarUsuario($tmpUsuario);//cadastrando
     
-    echo "<script>alert('Dados Cadastrados.');</script>";
+    if($statusCad == 0){
+        echo "<script>alert('E-mail já cadastrado em sistema.');</script>";
+    }else{    
+        echo "<script>alert('Dados Cadastrados.');</script>";
+    }
     echo "<script>location.href='../../index.php';</script>";//redirecionando
     
     //header("location:../../index.php");

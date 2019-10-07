@@ -10,22 +10,31 @@ class UsuariosDAO {
     public static function cadastrarUsuario($tmpUsuario) {
 
         $vConn = ConexaoDAO::abrirConexao();
+        $email = $tmpUsuario->getEmail();
 
-        $sqlCadastra = "Insert into usuarios(";
-        $sqlCadastra .= "email_USUARIO, nome_USUARIO,";
-        $sqlCadastra .= "senha_USUARIO,telefone_USUARIO)";
-        $sqlCadastra .= "values(";
-        $sqlCadastra .= "'" . $tmpUsuario->getEmail() . "',";
-        $sqlCadastra .= "'" . $tmpUsuario->getNome() . "',";
-        $sqlCadastra .= "'" . md5($tmpUsuario->getSenha()) . "',";
-        $sqlCadastra .= "'" . $tmpUsuario->getTelefone() . "')";
+        $sqlVerifica = "Select * from Usuarios where email_USUARIO like '$email'";
+        $rsVerifica = mysqli_query($vConn, $sqlVerifica) or die(mysqli_error($vConn));
 
-        //executando SQL e interrompendo a execução do metodo
-        //em caso de erro
-        mysqli_query($vConn, $sqlCadastra)
-                or die(mysqli_error($vConn));
+        if (mysqli_num_rows($rsVerifica) > 0) {
+            return 0;
+        } else {
 
-        return true;
+            $sqlCadastra = "Insert into usuarios(";
+            $sqlCadastra .= "email_USUARIO, nome_USUARIO,";
+            $sqlCadastra .= "senha_USUARIO,telefone_USUARIO)";
+            $sqlCadastra .= "values(";
+            $sqlCadastra .= "'" . $tmpUsuario->getEmail() . "',";
+            $sqlCadastra .= "'" . $tmpUsuario->getNome() . "',";
+            $sqlCadastra .= "'" . md5($tmpUsuario->getSenha()) . "',";
+            $sqlCadastra .= "'" . $tmpUsuario->getTelefone() . "')";
+
+            //executando SQL e interrompendo a execução do metodo
+            //em caso de erro
+            mysqli_query($vConn, $sqlCadastra)
+                    or die(mysqli_error($vConn));
+
+            return 1;
+        }
     }
 
     public static function validarUsuario($tmpEmail, $tmpSenha) {
@@ -115,24 +124,22 @@ class UsuariosDAO {
         }
     }
 
-    public static function consultarUsuario($tmpEmail){
+    public static function consultarUsuario($tmpEmail) {
         $vConn = ConexaoDAO::abrirConexao();
-        
+
         $sqlUsuario = "Select * from Usuarios where email_USUARIO like '$tmpEmail'";
         $rsUsuario = mysqli_query($vConn, $sqlUsuario) or die(mysqli_error($vConn));
-        
+
         $tmpUsuario = new Usuarios();
-        
+
         $tblUsuario = mysqli_fetch_array($rsUsuario);
         $tmpUsuario->setEmail($tblUsuario['email_USUARIO']);
         $tmpUsuario->setNome($tblUsuario['nome_USUARIO']);
         $tmpUsuario->setTelefone($tblUsuario['telefone_USUARIO']);
-        
+
         return $tmpUsuario;
-        
-        
     }
-    
+
 }
 
 //fechando classe

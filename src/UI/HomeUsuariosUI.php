@@ -22,7 +22,9 @@ session_start();
                                 <div class="input-group">
                                      <input type="text" name="HTML_busca" placeholder="Pesquisar usuários" class="form-control" style="height:45px;width:425px;">
                                      <div class="input-group-append">
-                                        <button type="submit" class="btn bg-primary-light text-white">Buscar</button>
+                                        <button type="submit" class="btn bg-primary-light text-white">
+                                            Buscar
+                                        </button>
                                      </div>
                                 </div>
                             </form>

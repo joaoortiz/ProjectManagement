@@ -12,6 +12,7 @@ session_start();
 $proj = $_GET['proj'];
 $tar = $_GET['tar'];
 $tmpProjeto = ProjetosDAO::consultarProjeto($proj);
+$adm = $tmpProjeto->getEmailUsuario();
 $tmpTarefa = TarefasDAO::consultarTarefa($tar);
 $tmpUsuario = UsuariosDAO::consultarUsuario($tmpTarefa->getEmailUsuario());
 
@@ -33,7 +34,7 @@ if ($tmpTarefa->getStatus() == 0) {
         <div class="container" style="margin-top: 10px;">
             <div class="card">
                 <div class="card-header bg-primary-dark text-white">
-                    
+
                     <h5><i class="fa fa-file-text fa-fw text-white"></i> <?= $tmpProjeto->getNome(); ?></h5>
                 </div>
                 <div class="card-body">
@@ -47,7 +48,27 @@ if ($tmpTarefa->getStatus() == 0) {
                         <div class="card-body">
 
                             <?= $tmpTarefa->getDescricao(); ?><br>
-                            Status: <b><?= $status; ?></b>
+                            Status: <b><?= $status; ?></b><br>
+                            <?php
+                            if ($adm == $_SESSION['email']) {
+
+                                if ($tmpTarefa->getStatus() == 0) {
+                                    ?>
+                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpProjeto->getCodigo(); ?>&tar=<?= $tmpTarefa->getCodigo(); ?>&acao=3" class="btn btn-warning float-right text-white">
+                                        <i class="fa fa-thumbs-up fa-fw fa-lg"></i>
+                                        Finalizar
+                                    </a>
+                                <?php } else { ?>
+
+                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpProjeto->getCodigo(); ?>&tar=<?= $tmpTarefa->getCodigo(); ?>&acao=3" class="btn btn-warning float-right text-white">
+                                        <i class="fa fa-thumbs-down fa-fw fa-lg"></i>
+                                        Reabrir
+                                    </a>
+                                    <?php
+                                }
+                            }
+                            ?>
+
                         </div>                               
                     </div>
                     <div class="row">
@@ -61,7 +82,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     <form>
                                         <div class="form-group">
                                             <h5><?= $tmpUsuario->getNome(); ?></h5>
-                                            <?= $tmpTarefa->getEmailUsuario(); ?>
+<?= $tmpTarefa->getEmailUsuario(); ?>
                                         </div>
                                         <div class="form-group">
                                             <textarea class="form-control">                                            

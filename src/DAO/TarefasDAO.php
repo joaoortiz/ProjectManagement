@@ -78,6 +78,21 @@ class TarefasDAO {
         return $tmpTarefa;
     }
     public static function alterarStatus($tmpCodigo) {
+        $vConn = ConexaoDAO::abrirConexao();
+        
+        $sqlTar = "Select * from TAREFAS where codigo_TAREFA = $tmpCodigo";
+        $rsTar = mysqli_query($vConn, $sqlTar) or die(mysqli_error($vConn));
+        $tblTar = mysqli_fetch_array($rsTar);
+        $status = $tblTar['status_TAREFA'];
+        
+        if($status == 1){
+            $novoStatus = 0;            
+        }else{
+            $novoStatus = 1;            
+        }
+        
+        $sqlStTar = "Update TAREFAS set status_TAREFA = '$novoStatus' where codigo_TAREFA = '$tmpCodigo'";
+        mysqli_query($vConn, $sqlStTar) or die(mysqli_error($vConn));
         
     }
 }

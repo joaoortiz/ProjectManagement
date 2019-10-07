@@ -140,9 +140,11 @@ $fim = $tmpProjeto->getFim();
                     </div>
 
                     <div class="float-left">
+                        <i class="fa fa-calendar fa-fw fa-sm"></i>
                         <?= ProjetosDAO::corrigirData($tmpProjeto->getInicio()); ?>
                     </div>
                     <div class="float-right">     
+                        <i class="fa fa-calendar fa-fw fa-sm"></i>
                         <?= ProjetosDAO::corrigirData($tmpProjeto->getFim()); ?>
                     </div>
                     <br><br>
