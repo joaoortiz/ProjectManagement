@@ -35,7 +35,8 @@ if ($tmpTarefa->getStatus() == 0) {
             <div class="card">
                 <div class="card-header bg-primary-dark text-white">
 
-                    <h5><i class="fa fa-file-text fa-fw text-white"></i> <?= $tmpProjeto->getNome(); ?></h5>
+                    <h5><i class="fa fa-file-text fa-fw text-white"></i> 
+                        <a class="text-white" href="DetalhesProjetoUI.php?cod=<?=$tmpProjeto->getCodigo();?>"><?= $tmpProjeto->getNome(); ?></h5></a>
                 </div>
                 <div class="card-body">
 
