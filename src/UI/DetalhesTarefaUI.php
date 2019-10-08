@@ -31,11 +31,17 @@ if ($tmpTarefa->getStatus() == 0) {
 
     </head>
     <body>
+            <?php
+       include "MenuTopoUI.php";
+       
+       ?>
+        
         <div class="container" style="margin-top: 10px;">
             <div class="card">
                 <div class="card-header bg-primary-dark text-white">
 
-                    <h5><i class="fa fa-file-text fa-fw text-white"></i> <?= $tmpProjeto->getNome(); ?></h5>
+                    <h5><i class="fa fa-file-text fa-fw text-white"></i>
+                        <a class="text-white" href="DetalhesProjetoUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>"><?= $tmpProjeto->getNome(); ?></h5></a>
                 </div>
                 <div class="card-body">
 
@@ -82,7 +88,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     <form>
                                         <div class="form-group">
                                             <h5><?= $tmpUsuario->getNome(); ?></h5>
-<?= $tmpTarefa->getEmailUsuario(); ?>
+                                            <?= $tmpTarefa->getEmailUsuario(); ?>
                                         </div>
                                         <div class="form-group">
                                             <textarea class="form-control">                                            

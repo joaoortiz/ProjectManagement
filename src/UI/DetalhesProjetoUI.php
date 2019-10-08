@@ -10,6 +10,7 @@ session_start();
 
 $proj = $_GET['cod'];
 $tmpProjeto = ProjetosDAO::consultarProjeto($proj);
+$tmpUsuario = UsuariosDAO::consultarUsuario($tmpProjeto->getEmailUsuario());
 
 $inicio = $tmpProjeto->getInicio();
 $fim = $tmpProjeto->getFim();
@@ -41,6 +42,11 @@ $fim = $tmpProjeto->getFim();
 
     </head>
     <body>
+            <?php
+       include "MenuTopoUI.php";
+       
+       ?>
+        
 
         <div class="container" style="margin-top: 10px;">
             <div class="row">
@@ -53,7 +59,7 @@ $fim = $tmpProjeto->getFim();
                         <div class="card-body">
                             <h5>
                                 <i class="fa fa-user fa-fw fa-lg"></i>
-                                Coordenador: <?= $tmpProjeto->getEmailUsuario(); ?>
+                                Coordenador: <?= $tmpUsuario->getNome(); ?>
                             </h5>
                             <br>
                             <?= $tmpProjeto->getDescricao(); ?>

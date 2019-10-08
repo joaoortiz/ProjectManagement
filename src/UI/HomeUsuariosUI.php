@@ -14,17 +14,10 @@ session_start();
 
     <body>
 
-        <nav class="navbar navbar-expand-lg bg-primary-light">
-
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link text-white" href="#">Home <span class="sr-only">(Página atual)</span></a>
-                    <a class="nav-item nav-link text-white" href="#">Destaques</a>
-                    <a class="nav-item nav-link text-white" href="#">Preços</a>
-                    <a class="nav-item nav-link text-white" href="#">Desativado</a>
-                </div>
-            </div>
-        </nav>
+       <?php
+       include "MenuTopoUI.php";
+       
+       ?>
 
 
         <div class="container">
