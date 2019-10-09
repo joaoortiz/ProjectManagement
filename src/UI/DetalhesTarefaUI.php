@@ -31,11 +31,10 @@ if ($tmpTarefa->getStatus() == 0) {
 
     </head>
     <body>
-            <?php
-       include "MenuTopoUI.php";
-       
-       ?>
-        
+        <?php
+        include "MenuTopoUI.php";
+        ?>
+
         <div class="container" style="margin-top: 10px;">
             <div class="card">
                 <div class="card-header bg-primary-dark text-white">
@@ -118,13 +117,33 @@ if ($tmpTarefa->getStatus() == 0) {
                                     Arquivos
                                 </div>
                                 <div class="card-body">
-                                    LISTA DE ARQUIVOS   
+                                    <div class="row">
+                                        <?php
+                                        /*$pasta = dir("../../files/");
 
-                                    <form>
+                                        while ($arquivo = $pasta->read()) {
+
+                                            if ($arquivo != "." && $arquivo != "..") {
+                                                ?>
+                                                <div class="col-md-2">
+                                                    <font style="font-size:10pt;"><?= $arquivo; ?></font>
+                                                </div>
+
+                                                <?php
+                                            }
+                                        }
+                                        $pasta->close();*/
+                                        ?>
+                                    </div>
+                                    
+                                    <hr>
+
+                                    <form action="../Control/ArquivosControl.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <input type="file" class="form-control-sm">
+                                            <input type="file" name="HTML_arquivo" class="form-control-sm">
+                                            <input type="hidden" name="codTarefa" value="<?=$tmpTarefa->getCodigo();?>">
+                                            <button type="submit" class="btn btn-primary float-right">Enviar</button>
                                         </div>
-
                                     </form>
                                 </div>                               
                             </div>
