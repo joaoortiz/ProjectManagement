@@ -22,6 +22,11 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
         <link rel="stylesheet" href="../../assets/css/cores.css">
     </head>
     <body>
+        <?php
+       include "MenuTopoUI.php";
+       
+       ?>
+        
         <div class="container d-flex" style="justify-content:center;">
             <div class="col-md-8"style="margin-top:100px;">
                 <center><p><h5>Informe os dados da Tarefa</h5></p></center>

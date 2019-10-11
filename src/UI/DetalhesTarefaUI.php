@@ -5,6 +5,7 @@ require_once "../Model/Projetos.php";
 require_once "../DAO/ProjetosDAO.php";
 require_once "../Model/Tarefas.php";
 require_once "../DAO/TarefasDAO.php";
+require_once "../Model/Arquivos.php";
 require_once "../Model/Usuarios.php";
 require_once "../DAO/UsuariosDAO.php";
 session_start();
@@ -15,6 +16,7 @@ $tmpProjeto = ProjetosDAO::consultarProjeto($proj);
 $adm = $tmpProjeto->getEmailUsuario();
 $tmpTarefa = TarefasDAO::consultarTarefa($tar);
 $tmpUsuario = UsuariosDAO::consultarUsuario($tmpTarefa->getEmailUsuario());
+$itens = TarefasDAO::listarArquivos($tar);
 
 if ($tmpTarefa->getStatus() == 0) {
     $status = "Incompleta";
@@ -119,20 +121,26 @@ if ($tmpTarefa->getStatus() == 0) {
                                 <div class="card-body">
                                     <div class="row">
                                         <?php
-                                        /*$pasta = dir("../../files/");
+                                        
 
-                                        while ($arquivo = $pasta->read()) {
-
-                                            if ($arquivo != "." && $arquivo != "..") {
+                                        for ($i=0; $i<count($itens); $i++) {
+                                                $tipo = substr($itens[$i]->getNome(), count($itens[$i]->getNome())-4);
+                                            
+                                                if($tipo == "txt"){
+                                                    $icon = "fa-file";
+                                                }else if($tipo == "doc"){
+                                                 $icon = "fa-file-word";   
+                                                }
+                                                
                                                 ?>
-                                                <div class="col-md-2">
-                                                    <font style="font-size:10pt;"><?= $arquivo; ?></font>
+                                                <div class="col-md-2" style="text-align:center;">
+                                                    <i class="fa fa-file-o fa-3x"></i><br>
+                                                    <font style="font-size:10pt;"><?= $itens[$i]->getNome(); ?></font>
                                                 </div>
 
                                                 <?php
                                             }
-                                        }
-                                        $pasta->close();*/
+                                                                                
                                         ?>
                                     </div>
                                     

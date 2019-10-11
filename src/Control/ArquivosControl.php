@@ -29,7 +29,7 @@ $tmpArquivo->setCodigoTarefa($codTar);
 TarefasDAO::cadastrarArquivo($tmpArquivo);
 
 
-        echo $sqlArquivo;
+
 //$status = move_uploaded_file($nomeTemp, "../../files/".$nomeArquivo);
 //echo $codTar ."<br>";
 //echo $status;
