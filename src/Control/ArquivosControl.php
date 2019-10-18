@@ -5,6 +5,7 @@ require_once "../DAO/TarefasDAO.php";
 
 $tmpArquivo = new Arquivos();
 
+$codProj = $_POST['codProjeto'];
 $codTar = $_POST['codTarefa'];
 
 $nomeArquivo = $_FILES['HTML_arquivo']['name'];
@@ -15,11 +16,11 @@ $tiposPermitidos = array("png", "jpg", "doc", "docx", "ppt", "pptx", "pdf", "txt
 $vArquivo = explode(".", $nomeArquivo);
 $ext = $vArquivo[count($vArquivo) - 1];
 
-if (in_array(strtolower($ext), $tiposPermitidos)) {
-    echo "aceito";
+if (!in_array(strtolower($ext), $tiposPermitidos)) {
+    echo "Não aceito";
 } else {
     echo "nao aceito";
-}
+
 $hoje=date("Y-m-d");
 
 $tmpArquivo->setNome($nomeArquivo);
@@ -28,9 +29,14 @@ $tmpArquivo->setCodigoTarefa($codTar);
 
 TarefasDAO::cadastrarArquivo($tmpArquivo);
 
+if(!is_dir("../../files/".$codTar)){
+    mkdir("../../files/".$codTar);
+}
 
+$status = move_uploaded_file($nomeTemp, "../../files/". $codTar ."/".$codTar."_".$nomeArquivo);
 
-//$status = move_uploaded_file($nomeTemp, "../../files/".$nomeArquivo);
+}
+echo "<script>location.href='../UI/DetalhesTarefaUI.php?proj=$codProj&tar=$codTar';</script>";
 //echo $codTar ."<br>";
 //echo $status;
 ?>

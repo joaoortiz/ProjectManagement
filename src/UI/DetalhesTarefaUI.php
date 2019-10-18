@@ -122,6 +122,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     <div class="row">
                                         <?php
                                         
+                                        //echo TarefasDAO::pegarUltimoArquivo($tar);
 
                                         for ($i=0; $i<count($itens); $i++) {
                                                 $tipo = substr($itens[$i]->getNome(), count($itens[$i]->getNome())-4);
@@ -134,8 +135,15 @@ if ($tmpTarefa->getStatus() == 0) {
                                                 
                                                 ?>
                                                 <div class="col-md-2" style="text-align:center;">
-                                                    <i class="fa fa-file-o fa-3x"></i><br>
-                                                    <font style="font-size:10pt;"><?= $itens[$i]->getNome(); ?></font>
+                                                    <i class="fa fa-file-o fa-2x"></i>
+                                                    <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
+                                                    <br>
+                                                    <a href="../../files/<?=$tmpTarefa->getCodigo();?>/<?=$itens[$i]->getNome();?>">
+                                                        <font style="font-size:10pt;">
+                                                        <?= $itens[$i]->getNome(); ?>                                                        
+                                                        </font>
+                                                    </a>
+                                                    
                                                 </div>
 
                                                 <?php
@@ -149,6 +157,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     <form action="../Control/ArquivosControl.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <input type="file" name="HTML_arquivo" class="form-control-sm">
+                                            <input type="hidden" name="codProjeto" value="<?=$tmpProjeto->getCodigo();?>">
                                             <input type="hidden" name="codTarefa" value="<?=$tmpTarefa->getCodigo();?>">
                                             <button type="submit" class="btn btn-primary float-right">Enviar</button>
                                         </div>

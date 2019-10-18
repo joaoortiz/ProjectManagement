@@ -109,6 +109,17 @@ class TarefasDAO {
 
         mysqli_query($vConn, $sqlArquivo) or die(mysqli_error($vConn));
     }
+    
+    public static function pegarUltimoArquivo($tmpTarefa){
+        
+        $itens = new ArrayObject();
+        $itens = TarefasDAO::listarArquivos($tmpTarefa);
+        
+        $ultimoArquivo = count($itens);
+        
+        return $ultimoArquivo;
+
+    }
 
     public static function listarArquivos($tmpTarefa) {
         $vConn = ConexaoDAO::abrirConexao();
