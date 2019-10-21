@@ -1,5 +1,6 @@
 <?php
 require_once "../DAO/ProjetosDAO.php";
+require_once "../DAO/TarefasDAO.php";
 session_start();
 ?>
 
@@ -109,7 +110,7 @@ session_start();
                     <div class="card">
                         <div class="card-header bg-primary-shadow" style="height:50px;">
                             <h5>
-                                <a href="" class="text-white">
+                                <a href="ListaTarefasUI.php" class="text-white">
                                     <i class="fa fa-list fa-lg fa-fw text-white"></i>
                                     Tarefas
                                 </a>
@@ -117,7 +118,7 @@ session_start();
                         </div>
                         <div class="card-body text-center" style="height:200px;line-height:120px;">
                             <font style="font-size:100pt;">
-                            10
+                            <?=TarefasDAO::contarTarefas($_SESSION['email']);?>
                             </font>
                         </div>                            
                     </div>

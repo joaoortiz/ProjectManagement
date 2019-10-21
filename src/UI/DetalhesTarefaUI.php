@@ -153,7 +153,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     </div>
                                     
                                     <hr>
-
+                                    <?php if ($tmpTarefa->getEmailUsuario() == $_SESSION['email']) { ?>
                                     <form action="../Control/ArquivosControl.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <input type="file" name="HTML_arquivo" class="form-control-sm">
@@ -162,6 +162,8 @@ if ($tmpTarefa->getStatus() == 0) {
                                             <button type="submit" class="btn btn-primary float-right">Enviar</button>
                                         </div>
                                     </form>
+                                    
+                                    <?php } ?>
                                 </div>                               
                             </div>
                         </div>

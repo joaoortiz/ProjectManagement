@@ -25,13 +25,15 @@ class TarefasDAO {
 
 //fechando metodo
 
-    public static function listarTarefas($tmpTipo, $tmpProj) {
+    public static function listarTarefas($tmpTipo, $tmpProj, $tmpEmail) {
         //PROGRAMAR
         $vConn = ConexaoDAO::abrirConexao();
         if ($tmpTipo == 0) { //todas
             $sqlLista = "Select * from TAREFAS where codigoProjeto_TAREFA = '$tmpProj'";
         } else if ($tmpTipo == 1) {//finalizadas
             $sqlLista = "Select * from TAREFAS where codigoProjeto_TAREFA = '$tmpProj' and status_TAREFA = 1";
+        }else if($tmpTipo == 2){
+            $sqlLista = "Select * from TAREFAS T, PROJETOS P where T.emailUsuario_TAREFA like '$tmpEmail' and T.codigoProjeto_TAREFA = P.codigo_PROJETO order by T.codigoProjeto_TAREFA";
         }
 
         $rsLista = mysqli_query($vConn, $sqlLista)
@@ -53,6 +55,7 @@ class TarefasDAO {
                 $tmpTarefa->setStatus($dados['status_TAREFA']);
                 $tmpTarefa->setEmailUsuario($dados['emailUsuario_TAREFA']);
                 $tmpTarefa->setCodigoProjeto($dados['codigoProjeto_TAREFA']);
+                
 
                 $itens->append($tmpTarefa);
             }//fechando while           
@@ -147,6 +150,11 @@ class TarefasDAO {
             }//fechando while           
             return $itens;
         }//fechando else
+    }
+    
+    public static function contarTarefas($tmpEmail){
+        $itens = TarefasDAO::listarTarefas(2, 0, $tmpEmail);
+        return count($itens);
     }
 
 }

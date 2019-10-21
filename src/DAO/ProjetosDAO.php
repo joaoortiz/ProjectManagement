@@ -138,8 +138,8 @@ class ProjetosDAO {
 
     public static function calcularProgresso($tmpCodigo){
         
-        $total = TarefasDAO::listarTarefas(0, $tmpCodigo);
-        $concluidas = TarefasDAO::listarTarefas(1, $tmpCodigo);
+        $total = TarefasDAO::listarTarefas(0, $tmpCodigo,"");
+        $concluidas = TarefasDAO::listarTarefas(1, $tmpCodigo,"");
                 
         if($total == null){
             return 0;

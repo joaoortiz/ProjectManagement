@@ -171,7 +171,7 @@ $fim = $tmpProjeto->getFim();
                         </div>
                         <div class="card-body" style="min-height:318px;height:auto;">
                             <?php
-                            include "ListaTarefasUI.php";
+                            include "MostraTarefasUI.php";
                             ?>
                         </div> 
                     </div>

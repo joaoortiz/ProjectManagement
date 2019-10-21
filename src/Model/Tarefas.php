@@ -1,6 +1,8 @@
 <?php
 
-class Tarefas {
+require_once "Projetos.php";
+
+class Tarefas  extends Projetos{
     
    private $codigo, $nome, $descricao, $data, $status, $emailUsuario, $codigoProjeto;
    

@@ -1,61 +1,74 @@
 <?php
-require_once "../DAO/UsuariosDAO.php";
-require_once "../Model/Usuarios.php";
 require_once "../DAO/ProjetosDAO.php";
-require_once "../DAO/TarefasDAO.php";
-require_once "../Model/Tarefas.php";
-$itens = TarefasDAO::listarTarefas(0, $proj);
+require_once "../Model/Projetos.php";
+session_start();
+
+$email = $_SESSION['email'];
+$itens = TarefasDAO::listarTarefas(2, 0, $email);
 ?>
-      
-                   
-            <div class="table-responsive border">
-                
-                <table class="table table-sm table-striped">
-                    <thead class="bg-light"> <!-- cabeçalho da tabela -->
-                        <th>Nome da Tarefa</th>
-                        <th>Data Registrada</th>
-                        <th>Responsável</th>
-                        <th>Status</th>                        
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../assets/css/cores.css">
+    </head>
+
+    <body>
+        <?php
+        include "MenuTopoUI.php";
+        ?>
+
+        <div class="container">
+
+            <div class="table-responsive border" style="margin-top:70px;">
+
+                <table class="table table-striped">
+                    <thead class="bg-primary-shadow text-white"> <!-- cabeçalho da tabela -->
+                    <th>Nome da Tarefa</th>
+                    <th>Data de Início</th>
+                    <th>Projeto</th>
+                    <th>Status</th>                        
                     </thead> 
-                    
-                    <tbody>                        
-                        <?php 
-                        if($itens != null){
-                        
-                        for($i=0; $i<count($itens); $i++) {  ?>
-                        
-                        <tr>
-                            <td>
-                                <a href="DetalhesTarefaUI.php?proj=<?=$proj;?>&tar=<?=$itens[$i]->getCodigo();?>">
-                                    <?=$itens[$i]->getNome();?>
-                                </a>
-                            </td>
-                                                        
-                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getData());?></td>
-                            
-                                <?php
-                                    $user = $itens[$i]->getEmailUsuario();
-                                    $tmpUsuario = UsuariosDAO::consultarUsuario($user);
-                                    $nome = $tmpUsuario->getNome();
+
+                    <tbody>
+
+                        <?php
+                        if ($itens != null) {
+
+                            for ($i = 0; $i < count($itens); $i++) {
+                                $dadosProj = ProjetosDAO::consultarProjeto($itens[$i]->getCodigoProjeto());
                                 ?>
-                            <td><?=$nome;?></td>
-                            <td>                                
-                                <?php
-                                    if($itens[$i]->getStatus() == 0)
-                                        echo "Incompleta";
-                                    else
-                                        echo "Finalizada";
-                                ?>                                
-                            </td>
-                        </tr>
-                        
-                        <?php  } 
-                        }
-                        ?>
-                        
+
+                                <tr>
+                                    <td>
+                                        <a href="DetalhesTarefaUI.php?proj=<?= $dadosProj->getCodigo(); ?>&tar=<?= $itens[$i]->getCodigo(); ?>">
+        <?= $itens[$i]->getNome(); ?>
+                                        </a>
+                                    </td>
+
+                                    <td><?= ProjetosDAO::corrigirData($itens[$i]->getData()); ?></td>
+
+
+                                    <td><?= $dadosProj->getNome(); ?></td>
+                                    <td><?= $itens[$i]->getStatus(); ?></td>
+                                </tr>
+
+        <?php
+    }
+}
+?>
+
                     </tbody>
-                    
+
                 </table>                
-                
+
             </div>
-            
+
+
+        </div>
+
+    </body>
+
+
+</html>
