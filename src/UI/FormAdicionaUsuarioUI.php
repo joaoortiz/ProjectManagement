@@ -8,26 +8,26 @@
 
         <h5>
             <i class="fa fa-user-plus fa-lg fa-fw text-white"></i>
-            Adicionar Integrante - <?=$tmpProjeto->getNome();?>
+            <?=$texto[$lang]['card_addmember'];?> - <?=$tmpProjeto->getNome();?>
 
         </h5>
     </div>
     <div class="card-body text-center" style="min-height:150px;height:auto;">            
-        Informe o e-mail do Usuário que será adicionado ao projeto.<br><br>
+        <?=$texto[$lang]['text_addmember'];?>.<br><br>
         <form action="../Control/UsuariosControl.php" method="GET">
             <div class="form-group">
                 <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa fa-envelope fa-fw"></i></span>
                 </div>
-                <input type="text" name="HTML_email" placeholder="Insira o email do usuário" class="form-control">
+                <input type="text" name="HTML_email" placeholder="<?=$texto[$lang]['pholder_email'];?>" class="form-control">
                 </div>
 
             </div>
             <div class="form-group">
                 <input type="hidden" name="cod" value="<?=$proj;?>">
                 <input type="hidden" name="acao" value="4">
-                <button type="submit" class="btn bg-primary-light text-white form-control">Cadastrar</button>
+                <button type="submit" class="btn bg-primary-light text-white form-control"><?=$texto[$lang]['btn_add'];?></button>
             </div>
         </form>
     </div>

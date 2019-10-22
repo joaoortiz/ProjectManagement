@@ -1,4 +1,6 @@
 <?php
+include "../../assets/php/lang.php";
+$texto = translatePg();
 
 date_default_timezone_set('Brazil/East');
 
@@ -6,8 +8,6 @@ require_once "../Model/Usuarios.php";
 require_once "../DAO/UsuariosDAO.php";
 require_once "../Model/Projetos.php";
 require_once "../DAO/ProjetosDAO.php";
-
-session_start();
 
 $cod = $_GET['cod']; //identificar o Projeto
 $tmpProjeto = ProjetosDAO::consultarProjeto($cod);
@@ -29,23 +29,23 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
         
         <div class="container d-flex" style="justify-content:center;">
             <div class="col-md-8"style="margin-top:100px;">
-                <center><p><h5>Informe os dados da Tarefa</h5></p></center>
+                <center><p><h5><?=$texto[$lang]['text_cadtask'];?></h5></p></center>
                 
                 <form action="../Control/TarefasControl.php" method="post">
                 
                     <div class="form-group">
-                        <h5>Nome do Projeto: <?=$tmpProjeto->getNome();?></h5>
+                        <h5><?=$texto[$lang]['pholder_projname'];?>: <?=$tmpProjeto->getNome();?></h5>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="HTML_nome" placeholder="Insira o nome da tarefa" class="form-control">
+                        <input type="text" name="HTML_nome" placeholder="<?=$texto[$lang]['pholder_taskname'];?>" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Descrição da tarefa</label>
+                        <label><?=$texto[$lang]['pholder_projdesc'];?></label>
                         <textarea name="HTML_descricao" class="form-control"></textarea> 
                     </div>
                     <div class="form-group">
                         <select name="HTML_usuario" class="form-control">
-                            <option>Selecione o responsável</option>
+                            <option><?=$texto[$lang]['pholder_taskresp'];?></option>
                             
                             <?php
                                 for($i=0; $i<count($itens); $i++){
@@ -63,7 +63,7 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Data de Inicio</label>
+                            <label><?=$texto[$lang]['pholder_projstart'];?></label>
                             <h4><?=ProjetosDAO::corrigirData(date('Y-m-d'));?></h4>
                         </div>
                         
@@ -71,7 +71,7 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
                     <div class="form-group">
                         <input type="hidden" name="codProj" value="<?=$cod?>">
                         <input type="hidden" name="acao" value="2">
-                        <button type="submit" class="btn btn-primary form-control">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary form-control"><?=$texto[$lang]['btn_register'];?></button>
                     </div>
                 </form>
             </div>

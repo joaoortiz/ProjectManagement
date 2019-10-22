@@ -1,21 +1,25 @@
 <?php
+
 session_start();
 
 $_SESSION['lang'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 $lang = $_SESSION['lang'];
 
-function translatePg(){
-$varArray = [
-   "pt" => ["title" => "Sistema de Gerenciamento de Projetos",
+function translatePg() {
+    $varArray = [
+        "pt" => ["title" => "Sistema de Gerenciamento de Projetos",
             "text_login" => "Preencha os campos abaixo para acessar o sistema.",
             "text_cadproj" => "Informe os dados do Projeto.",
+            "text_cadtask" => "Informe os dados da Tarefa.",
             "text_search" => "Pesquisar Projetos",
             "text_coord" => "Coordenador do Projeto",
             "text_progress" => "Concluído",
             "pholder_email" => "Informe o e-mail",
             "pholder_projname" => "Insira o nome do projeto",
+            "pholder_taskname" => "Insira o nome da tarefa",
             "pholder_projdesc" => "Descrição do projeto",
             "pholder_projcat" => "Selecione a categoria",
+            "pholder_taskresp" => "Selecione o responsável",
             "pholder_pass" => "Informe a senha",
             "pholder_projstart" => "Data de Início",
             "pholder_projend" => "Data de Fim",
@@ -23,6 +27,7 @@ $varArray = [
             "btn_login" => "Acessar Sistema",
             "btn_options" => "Opções",
             "btn_search" => "Buscar",
+            "btn_add" => "Adicionar",
             "btn_project" => "Criar Novo Projeto",
             "menu_item1" => "Meus Projetos",
             "menu_item2" => "Minhas Tarefas",
@@ -50,20 +55,26 @@ $varArray = [
             "btn_email" => "Enviar E-mail",
             "btn_finish" => "Finalizar",
             "btn_reopen" => "Reabrir",
-            "btn_send" => "Enviar"
-           ],
-    
-   "en" => ["title" => "Project Management System",
+            "btn_send" => "Enviar",
+            "card_addmember" => "Adicionar Integrante",
+            "text_addmember" => "Insira o e-mail do usuário para integrá-lo ao projeto"
+        ],
+        
+        "en" => ["title" => "Project Management System",
             "text_login" => "Please, fill the informations bellow to access the system.",
             "text_cadproj" => "Fill the fields bellow with the project informations.",
+            "text_cadtask" => "Fill the fields bellow with the task data.",
             "pholder_email" => "E-mail",
             "pholder_projname" => "Project Name",
+            "pholder_taskname" => "Task Name",
             "pholder_projdesc" => "Description",
             "pholder_projcat" => "Choose a category",
+            "pholder_taskresp" => "Select the responsible member",
             "pholder_pass" => "Password",
             "pholder_projstart" => "Start date",
             "pholder_projend" => "End date",
-	    "btn_register" => "Register",
+            "btn_register" => "Register",
+            "btn_add" => "Add",
             "btn_login" => "Log in",
             "menu_item1" => "My Projects",
             "menu_item2" => "My Tasks",
@@ -97,19 +108,21 @@ $varArray = [
             "btn_email" => "Send E-mail",
             "btn_finish" => "Finish",
             "btn_reopen" => "Reopen",
-            "btn_send" => "Send"
-           ]    
-];
-   
-	return $varArray;
+            "btn_send" => "Send",
+            "card_addmember" => "Add member",
+            "text_addmember" => "Insert a active user e-mail address to include in team"
+        ]
+    ];
+
+    return $varArray;
 }
-	
 ?>		
 
 
 <?php
-/*$ip=$_SERVER['REMOTE_ADDR'];
-$xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
-echo $xml->geoplugin_countryName . " - " . $ip;
-*/
+
+/* $ip=$_SERVER['REMOTE_ADDR'];
+  $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
+  echo $xml->geoplugin_countryName . " - " . $ip;
+ */
 ?>	
