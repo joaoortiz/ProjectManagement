@@ -1,12 +1,12 @@
 <meta charset="utf-8">
-
 <?php
+include "../../assets/php/lang.php";
+$texto = translatePg();
+
 require_once "../Model/Projetos.php";
 require_once "../Model/Usuarios.php";
 require_once "../DAO/ProjetosDAO.php";
 require_once "../DAO/UsuariosDAO.php";
-
-session_start();
 
 $proj = $_GET['cod'];
 $tmpProjeto = ProjetosDAO::consultarProjeto($proj);
@@ -59,7 +59,7 @@ $fim = $tmpProjeto->getFim();
                         <div class="card-body">
                             <h5>
                                 <i class="fa fa-user fa-fw fa-lg"></i>
-                                Coordenador: <?= $tmpUsuario->getNome(); ?>
+                                <?=$texto[$lang]['text_coord'];?>: <?= $tmpUsuario->getNome(); ?>
                             </h5>
                             <br>
                             <?= $tmpProjeto->getDescricao(); ?>
@@ -73,7 +73,7 @@ $fim = $tmpProjeto->getFim();
                     <div class="card">
                         <div class="card-header bg-primary-shadow text-white">
                             <i class="fa fa-spinner fa-lg fa-fw text-white"></i>
-                            Concluído
+                            <?=$texto[$lang]['text_progress'];?>
                         </div>
                         <div class="card-body text-center" style="height:120px;line-height:80px;">
 
@@ -91,7 +91,7 @@ $fim = $tmpProjeto->getFim();
                             <div class="row">
                                 <div class="col-md-10">
                                     <i class="fa fa-users fa-lg fa-fw text-white"></i>
-                                    Integrantes
+                                    <?=$texto[$lang]['card_team'];?>
                                 </div>
                                 <div class="col-md-2" style="padding-top:3px;">
                                     <a href="#" class="float-right" onclick="document.getElementById('DivAdd').style.display = 'block';">
@@ -106,7 +106,7 @@ $fim = $tmpProjeto->getFim();
 
                             if (count($itens) == 0) {
                                 ?>
-                                Sem integrantes
+                                <?=$texto[$lang]['text_nomembers'];?>
                                 <?php
                             } else {
                                 for ($i = 0; $i < count($itens); $i++) {
@@ -140,7 +140,7 @@ $fim = $tmpProjeto->getFim();
                     <div style="padding:5px;max-width:100%;width:<?= $progresso; ?>%;height:60px;background-color:<?= $cor; ?>;" id="DivBarra">                        
                         <div style="width:500px;">
                             <h1 style="font-family:impact;color:#999999">
-                                <?= ProjetosDAO::contarDias($fim); ?> dias restantes.
+                                <?= ProjetosDAO::contarDias($fim); ?> <?=$texto[$lang]['days_remain'];?>.
                             </h1>
                         </div>
                     </div>
@@ -159,7 +159,7 @@ $fim = $tmpProjeto->getFim();
                             <div class="row">
                                 <div class="col-md-11">
                                     <i class="fa fa-list fa-lg fa-fw text-white"></i>
-                                    Tarefas
+                                    <?=$texto[$lang]['card_tasks'];?>
                                 </div>
                                 <div class="col-md-1" style="padding-top:3px;">
                                     <a href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>">

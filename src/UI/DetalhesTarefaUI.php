@@ -1,6 +1,9 @@
 <meta charset="utf-8">
 
 <?php
+include "../../assets/php/lang.php";
+$texto = translatePg();
+
 require_once "../Model/Projetos.php";
 require_once "../DAO/ProjetosDAO.php";
 require_once "../Model/Tarefas.php";
@@ -8,7 +11,7 @@ require_once "../DAO/TarefasDAO.php";
 require_once "../Model/Arquivos.php";
 require_once "../Model/Usuarios.php";
 require_once "../DAO/UsuariosDAO.php";
-session_start();
+
 
 $proj = $_GET['proj'];
 $tar = $_GET['tar'];
@@ -19,9 +22,9 @@ $tmpUsuario = UsuariosDAO::consultarUsuario($tmpTarefa->getEmailUsuario());
 $itens = TarefasDAO::listarArquivos($tar);
 
 if ($tmpTarefa->getStatus() == 0) {
-    $status = "Incompleta";
+    $status = $texto[$lang]['text_tasknofinished'];
 } else {
-    $status = "Finalizada";
+    $status = $texto[$lang]['text_taskfinished'];
 }
 ?>
 <html>
@@ -63,13 +66,13 @@ if ($tmpTarefa->getStatus() == 0) {
                                     ?>
                                     <a href="../Control/TarefasControl.php?proj=<?= $tmpProjeto->getCodigo(); ?>&tar=<?= $tmpTarefa->getCodigo(); ?>&acao=3" class="btn btn-warning float-right text-white">
                                         <i class="fa fa-thumbs-up fa-fw fa-lg"></i>
-                                        Finalizar
+                                        <?= $texto[$lang]['btn_finish']; ?>
                                     </a>
                                 <?php } else { ?>
 
                                     <a href="../Control/TarefasControl.php?proj=<?= $tmpProjeto->getCodigo(); ?>&tar=<?= $tmpTarefa->getCodigo(); ?>&acao=3" class="btn btn-warning float-right text-white">
                                         <i class="fa fa-thumbs-down fa-fw fa-lg"></i>
-                                        Reabrir
+                                        <?= $texto[$lang]['btn_reopen']; ?>
                                     </a>
                                     <?php
                                 }
@@ -83,7 +86,7 @@ if ($tmpTarefa->getStatus() == 0) {
                             <div class="card" style="margin-top:15px;">
                                 <div class="card-header bg-primary-light text-white">
                                     <i class="fa fa-commenting-o fa-fw fa-lg text-white"></i>
-                                    Enviar mensagem ao responsável
+                                    <?= $texto[$lang]['card_email']; ?>
                                 </div>
                                 <div class="card-body">
                                     <form>
@@ -98,7 +101,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                         <div class="">
                                             <button type="submit" class="btn bg-primary-light form-control text-white">
                                                 <i class="fa fa-envelope fa-fw text-white"></i>
-                                                Enviar E-mail
+                                                <?= $texto[$lang]['btn_email']; ?>
                                             </button>
                                             <hr>
                                             <a href="https://web.whatsapp.com/send?phone=<?= $tmpUsuario->getTelefone(); ?>" target="_blank" class="btn btn-success form-control text-white">
@@ -116,64 +119,70 @@ if ($tmpTarefa->getStatus() == 0) {
                             <div class="card" style="margin-top:15px;">
                                 <div class="card-header bg-primary-light text-white">
                                     <i class="fa fa-file fa-fw fa-lg text-white"></i>
-                                    Arquivos
+                                    <?= $texto[$lang]['card_files']; ?>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <?php
-                                        
                                         //echo TarefasDAO::pegarUltimoArquivo($tar);
 
-                                        for ($i=0; $i<count($itens); $i++) {
-                                                $tipo = substr($itens[$i]->getNome(), count($itens[$i]->getNome())-4);
-                                            
-                                                if($tipo == "txt"){
-                                                    $icon = "fa-file";
-                                                }else if($tipo == "doc"){
-                                                 $icon = "fa-file-word";   
-                                                }
-                                                
-                                                ?>
-                                                <div class="col-md-2" style="text-align:center;">
-                                                    <i class="fa fa-file-o fa-2x"></i>
-                                                    <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
-                                                    <br>
-                                                    <a href="../../files/<?=$tmpTarefa->getCodigo();?>/<?=$itens[$i]->getNome();?>">
-                                                        <font style="font-size:10pt;">
-                                                        <?= $itens[$i]->getNome(); ?>                                                        
-                                                        </font>
-                                                    </a>
-                                                    
-                                                </div>
+                                        for ($i = 0; $i < count($itens); $i++) {
+                                            $tipo = substr($itens[$i]->getNome(), count($itens[$i]->getNome()) - 4);
 
-                                                <?php
+                                            if ($tipo == "txt") {
+                                                $icon = "fa-file";
+                                            } else if ($tipo == "doc") {
+                                                $icon = "fa-file-word";
                                             }
-                                                                                
-                                        ?>
+                                            ?>
+                                            <div class="col-md-2" style="text-align:center;">
+                                                <i class="fa fa-file-o fa-2x"></i>
+                                                <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
+                                                <br>
+                                                <a href="../../files/<?= $tmpTarefa->getCodigo(); ?>/<?= $itens[$i]->getNome(); ?>">
+                                                    <font style="font-size:10pt;">
+                                                        <?= $itens[$i]->getNome(); ?>                                                        
+                                                    </font>
+                                                </a>
+
+                                            </div>
+
+                                     <?php
+                                        }
+                                    ?>
                                     </div>
-                                    
+
                                     <hr>
                                     <?php if ($tmpTarefa->getEmailUsuario() == $_SESSION['email']) { ?>
-                                    <form action="../Control/ArquivosControl.php" method="POST" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <input type="file" name="HTML_arquivo" class="form-control-sm">
-                                            <input type="hidden" name="codProjeto" value="<?=$tmpProjeto->getCodigo();?>">
-                                            <input type="hidden" name="codTarefa" value="<?=$tmpTarefa->getCodigo();?>">
-                                            <button type="submit" class="btn btn-primary float-right">Enviar</button>
-                                        </div>
+                                        <form action="../Control/ArquivosControl.php" method="POST" enctype="multipart/form-data">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Selecione o arquivo</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" name="HTML_arquivo" class="custom-file-input" id="InputFile">
+                                                    <label class="custom-file-label" for="InputFile">Procurar</label>
+                                                </div>
+                                            </div><br>
+                                            <div class="form-group">
+                                                <input type="hidden" name="codProjeto" value="<?= $tmpProjeto->getCodigo(); ?>">
+                                                <input type="hidden" name="codTarefa" value="<?= $tmpTarefa->getCodigo(); ?>">
+                                                <button type="submit" class="btn btn-primary float-right"><?= $texto[$lang]['btn_send']; ?></button>
+                                            </div>
+                                    </div>
                                     </form>
-                                    
-                                    <?php } ?>
-                                </div>                               
-                            </div>
+
+<?php } ?>
+                            </div>                               
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
 
-    </body>
+    </div>
+
+</body>
 
 </html>

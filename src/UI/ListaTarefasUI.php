@@ -1,7 +1,10 @@
 <?php
+include "../../assets/php/lang.php";
+$texto = translatePg();
+
 require_once "../DAO/ProjetosDAO.php";
 require_once "../Model/Projetos.php";
-session_start();
+
 
 $email = $_SESSION['email'];
 $itens = TarefasDAO::listarTarefas(2, 0, $email);
@@ -25,10 +28,10 @@ $itens = TarefasDAO::listarTarefas(2, 0, $email);
 
                 <table class="table table-striped">
                     <thead class="bg-primary-shadow text-white"> <!-- cabeçalho da tabela -->
-                    <th>Nome da Tarefa</th>
-                    <th>Data de Início</th>
-                    <th>Projeto</th>
-                    <th>Status</th>                        
+                    <th><?= $texto[$lang]['tblTask_col1']; ?></th>
+                    <th><?= $texto[$lang]['tblTask_col2']; ?></th>
+                    <th><?= $texto[$lang]['tblTask_col3']; ?></th>
+                    <th><?= $texto[$lang]['tblTask_col4']; ?></th>                         
                     </thead> 
 
                     <tbody>
@@ -43,7 +46,7 @@ $itens = TarefasDAO::listarTarefas(2, 0, $email);
                                 <tr>
                                     <td>
                                         <a href="DetalhesTarefaUI.php?proj=<?= $dadosProj->getCodigo(); ?>&tar=<?= $itens[$i]->getCodigo(); ?>">
-        <?= $itens[$i]->getNome(); ?>
+                                            <?= $itens[$i]->getNome(); ?>
                                         </a>
                                     </td>
 
@@ -54,10 +57,10 @@ $itens = TarefasDAO::listarTarefas(2, 0, $email);
                                     <td><?= $itens[$i]->getStatus(); ?></td>
                                 </tr>
 
-        <?php
-    }
-}
-?>
+                                <?php
+                            }
+                        }
+                        ?>
 
                     </tbody>
 

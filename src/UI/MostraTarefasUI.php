@@ -14,10 +14,10 @@ $itens = TarefasDAO::listarTarefas(0, $proj,"");
                 
                 <table class="table table-sm table-striped">
                     <thead class="bg-light"> <!-- cabeçalho da tabela -->
-                        <th>Nome da Tarefa</th>
-                        <th>Data Registrada</th>
-                        <th>Responsável</th>
-                        <th>Status</th>                        
+                        <th><?=$texto[$lang]['tblTask_col1'];?></th>
+                        <th><?=$texto[$lang]['tblTask_col2'];?></th>
+                        <th><?=$texto[$lang]['tblTask_col3'];?></th>
+                        <th><?=$texto[$lang]['tblTask_col4'];?></th>                        
                     </thead> 
                     
                     <tbody>                        
@@ -44,9 +44,9 @@ $itens = TarefasDAO::listarTarefas(0, $proj,"");
                             <td>                                
                                 <?php
                                     if($itens[$i]->getStatus() == 0)
-                                        echo "Incompleta";
+                                        echo $texto[$lang]['text_tasknofinished'];
                                     else
-                                        echo "Finalizada";
+                                        echo $texto[$lang]['text_taskfinished'];
                                 ?>                                
                             </td>
                         </tr>

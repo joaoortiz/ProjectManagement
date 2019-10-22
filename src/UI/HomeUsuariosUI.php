@@ -1,7 +1,9 @@
 <?php
+include "../../assets/php/lang.php";
+$texto = translatePg();
+
 require_once "../DAO/ProjetosDAO.php";
 require_once "../DAO/TarefasDAO.php";
-session_start();
 ?>
 
 <html>
@@ -16,25 +18,19 @@ session_start();
     <body>
 
        <?php
-       include "MenuTopoUI.php";
-       
+       include "MenuTopoUI.php";       
        ?>
-
-
         <div class="container">
-
-
-
             <div class="row" style="margin-top:10px;"> <!--1º linha-->
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body" style="height:65px;padding-top:10px;">
                             <form class="form-inline">
                                 <div class="input-group">
-                                    <input type="text" name="HTML_busca" placeholder="Pesquisar usuários" class="form-control" style="height:45px;width:425px;">
+                                    <input type="text" name="HTML_busca" placeholder="<?=$texto[$lang]['text_search'];?>" class="form-control" style="height:45px;width:425px;">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn bg-primary-light text-white">
-                                            Buscar
+                                            <?=$texto[$lang]['btn_search'];?>
                                         </button>
                                     </div>
                                 </div>
@@ -48,7 +44,7 @@ session_start();
                             <button class="btn bg-primary-light" style="width:100%;height:45px;">
                                 <i class="fa fa-plus-square fa-lg fa-fw text-white"></i>
                                 <a href="FormCadastroProjetoUI.php" class="text-white">                                
-                                    Criar Novo Projeto
+                                    <?=$texto[$lang]['btn_project'];?>
                                 </a>
                             </button>
                         </div>
@@ -60,7 +56,7 @@ session_start();
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header bg-primary-shadow text-white" style="height:50px;">
-                            <h5 class="card-title">Dados do Usuário</h5>
+                            <h5 class="card-title"><?=$texto[$lang]['card_user'];?></h5>
                         </div>
                         <div class="card-body">
 
@@ -73,7 +69,7 @@ session_start();
 
                                 <a href="#" class="btn bg-primary-light text-white dropdown-toggle" style="height:45px;width:300px;"id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bars fa-lg fa-fw text-white"></i>
-                                    Opções
+                                    <?=$texto[$lang]['btn_options'];?>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-left" style="width:300px;">
                                     <a class="dropdown-item" href="#">Alterar Dados</a>
@@ -95,7 +91,7 @@ session_start();
                             <h5>
                                 <a href="ListaProjetosUI.php" class="text-white">
                                     <i class="fa fa-file-text fa-lg fa-fw text-white"></i>
-                                    Projetos
+                                    <?=$texto[$lang]['card_projects'];?>
                                 </a>
                             </h5>
                         </div>
@@ -112,7 +108,7 @@ session_start();
                             <h5>
                                 <a href="ListaTarefasUI.php" class="text-white">
                                     <i class="fa fa-list fa-lg fa-fw text-white"></i>
-                                    Tarefas
+                                    <?=$texto[$lang]['card_tasks'];?>
                                 </a>
                             </h5>
                         </div>
@@ -129,7 +125,7 @@ session_start();
                             <h5>
                                 <a href="" class="text-white">
                                     <i class="fa fa-users fa-lg fa-fw text-white"></i>
-                                    Contatos
+                                    <?=$texto[$lang]['card_contacts'];?>
                                 </a>
                             </h5>
                         </div>

@@ -1,7 +1,10 @@
 <?php
+include "../../assets/php/lang.php";
+$texto = translatePg();
+
 require_once "../DAO/ProjetosDAO.php";
 require_once "../Model/Projetos.php";
-session_start();
+
 
 $email = $_SESSION['email'];
 $itens = ProjetosDAO::listarProjetos(1, $email,"");
@@ -26,11 +29,11 @@ $itens = ProjetosDAO::listarProjetos(1, $email,"");
                 
                 <table class="table table-striped">
                     <thead class="bg-primary-shadow text-white"> <!-- cabeçalho da tabela -->
-                        <th>Nome do Projeto</th>
-                        <th>Data de Início</th>
-                        <th>Data de Fim</th>
-                        <th>Categoria</th>
-                        <th>Tarefas</th>
+                        <th><?=$texto[$lang]['tblProj_col1'];?></th>
+                        <th><?=$texto[$lang]['tblProj_col2'];?></th>
+                        <th><?=$texto[$lang]['tblProj_col3'];?></th>
+                        <th><?=$texto[$lang]['tblProj_col4'];?></th>
+                        <th><?=$texto[$lang]['tblProj_col5'];?></th>
                     </thead> 
                     
                     <tbody>
