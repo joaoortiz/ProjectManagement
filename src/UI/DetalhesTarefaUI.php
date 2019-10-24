@@ -137,9 +137,13 @@ if ($tmpTarefa->getStatus() == 0) {
                                             ?>
                                             <div class="col-md-2" style="text-align:center;">
                                                 <i class="fa fa-file-o fa-2x"></i>
-                                                <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
+                                                
+                                                <a href="../Control/ArquivosControl.php?proj=<?=$proj?>&tar=<?=$tar?>&acao=2&arq=<?=$itens[$i]->getCodigo();?>">
+                                                    <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
+                                                </a>
+                                                
                                                 <br>
-                                                <a href="../../files/<?= $tmpTarefa->getCodigo(); ?>/<?= $itens[$i]->getNome(); ?>">
+                                                <a href="../../files/<?= $tmpTarefa->getCodigo(); ?>/<?= $itens[$i]->getNome(); ?>" target="_blank">
                                                     <font style="font-size:10pt;">
                                                         <?= $itens[$i]->getNome(); ?>                                                        
                                                     </font>

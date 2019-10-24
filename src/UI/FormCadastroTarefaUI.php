@@ -11,6 +11,7 @@ require_once "../DAO/ProjetosDAO.php";
 
 $cod = $_GET['cod']; //identificar o Projeto
 $tmpProjeto = ProjetosDAO::consultarProjeto($cod);
+$tmpUsuario = UsuariosDAO::consultarUsuario($tmpProjeto->getEmailUsuario());
 
 $itens = UsuariosDAO::listarIntegrantes($cod);
 ?>
@@ -46,6 +47,7 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
                     <div class="form-group">
                         <select name="HTML_usuario" class="form-control">
                             <option><?=$texto[$lang]['pholder_taskresp'];?></option>
+                            <option value="<?=$tmpUsuario->getEmail();?>"><?=$tmpUsuario->getNome();?></option>
                             
                             <?php
                                 for($i=0; $i<count($itens); $i++){

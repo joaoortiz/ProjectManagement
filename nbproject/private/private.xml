@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/PHP/ProjectManager/src/UI/FormCadastroTarefaUI.php</file>
-            <file>file:/C:/PHP/ProjectManager/src/UI/FormCadastroProjetoUI.php</file>
-            <file>file:/C:/PHP/ProjectManager/assets/php/lang.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/DAO/ProjetosDAO.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/assets/php/lang.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/UI/DetalhesTarefaUI.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/UI/FormCadastroProjetoUI.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/DAO/TarefasDAO.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/UI/DetalhesProjetoUI.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/UI/FormCadastroTarefaUI.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/UI/MostraTarefasUI.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/DAO/UsuariosDAO.php</file>
+            <file>file:/C:/Users/jortiz/Documents/PHP/6CIC%20-%202019.2%20-%20WEB/ProjectManagement/src/Control/ArquivosControl.php</file>
         </group>
     </open-files>
 </project-private>

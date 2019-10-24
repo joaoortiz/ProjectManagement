@@ -23,8 +23,6 @@ class TarefasDAO {
         mysqli_query($vConn, $sqlCadTar) or die(mysqli_error($vConn));
     }
 
-//fechando metodo
-
     public static function listarTarefas($tmpTipo, $tmpProj, $tmpEmail) {
         //PROGRAMAR
         $vConn = ConexaoDAO::abrirConexao();
@@ -113,6 +111,12 @@ class TarefasDAO {
         mysqli_query($vConn, $sqlArquivo) or die(mysqli_error($vConn));
     }
     
+    public static function excluirArquivo($tmpCodigo) {
+        $vConn = ConexaoDAO::abrirConexao();
+        $sqlArquivo = "Delete from Arquivos where codigo_ARQUIVO = '$tmpCodigo'";
+        mysqli_query($vConn, $sqlArquivo) or die(mysqli_error($vConn));
+    }
+    
     public static function pegarUltimoArquivo($tmpTarefa){
         
         $itens = new ArrayObject();
@@ -155,6 +159,26 @@ class TarefasDAO {
     public static function contarTarefas($tmpEmail){
         $itens = TarefasDAO::listarTarefas(2, 0, $tmpEmail);
         return count($itens);
+    }
+    
+    public static function consultarArquivo($tmpCodigo){
+        $vConn = ConexaoDAO::abrirConexao();
+        
+        $tmpArquivo = new Arquivos();
+        $sqlArq = "Select * from arquivos where codigo_ARQUIVO = '$tmpCodigo'";
+        $rsArq = mysqli_query($vConn, $sqlArq)or die(mysql_error($vConn));
+        
+        if(mysqli_num_rows($rsArq)){
+            while($dados = mysqli_fetch_array($rsArq)){
+                $tmpArquivo->setCodigo($dados['codigo_ARQUIVO']);
+                $tmpArquivo->setNome($dados['nome_ARQUIVO']);
+                $tmpArquivo->setData($dados['data_ARQUIVO']);
+                $tmpArquivo->setCodigoTarefa($dados['codigoTarefa_ARQUIVO']);
+            }
+        }
+        
+        return $tmpArquivo;
+        
     }
 
 }
