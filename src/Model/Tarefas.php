@@ -2,64 +2,81 @@
 
 require_once "Projetos.php";
 
-class Tarefas  extends Projetos{
+class Tarefas extends Projetos{
     
-   private $codigo, $nome, $descricao, $data, $status, $emailUsuario, $codigoProjeto;
+   private $codigoTar, $nomeTar, $descricaoTar, $dataTar, $statusTar, $emailUsuarioTar, $nomeUsuarioTar, $telUsuarioTar, $codigoProjetoTar;
    
-   function getCodigo() {
-       return $this->codigo;
+   public function getCodigoTar() {
+       return $this->codigoTar;
    }
 
-   function getNome() {
-       return $this->nome;
+   public function getNomeTar() {
+       return $this->nomeTar;
    }
 
-   function getDescricao() {
-       return $this->descricao;
+   public function getDescricaoTar() {
+       return $this->descricaoTar;
    }
 
-   function getData() {
-       return $this->data;
+   public function getDataTar() {
+       return $this->dataTar;
    }
 
-   function getStatus() {
-       return $this->status;
+   public function getStatusTar() {
+       return $this->statusTar;
    }
 
-   function getEmailUsuario() {
-       return $this->emailUsuario;
+   public function getEmailUsuarioTar() {
+       return $this->emailUsuarioTar;
    }
 
-   function getCodigoProjeto() {
-       return $this->codigoProjeto;
+   public function getCodigoProjetoTar() {
+       return $this->codigoProjetoTar;
    }
 
-   function setCodigo($codigo) {
-       $this->codigo = $codigo;
+   public function setCodigoTar($codigoTar) {
+       $this->codigoTar = $codigoTar;
    }
 
-   function setNome($nome) {
-       $this->nome = $nome;
+   public function setNomeTar($nomeTar) {
+       $this->nomeTar = $nomeTar;
    }
 
-   function setDescricao($descricao) {
-       $this->descricao = $descricao;
+   public function setDescricaoTar($descricaoTar) {
+       $this->descricaoTar = $descricaoTar;
    }
 
-   function setData($data) {
-       $this->data = $data;
+   public function setDataTar($dataTar) {
+       $this->dataTar = $dataTar;
    }
 
-   function setStatus($status) {
-       $this->status = $status;
+   public function setStatusTar($statusTar) {
+       $this->statusTar = $statusTar;
    }
 
-   function setEmailUsuario($emailUsuario) {
-       $this->emailUsuario = $emailUsuario;
+   public function setEmailUsuarioTar($emailUsuarioTar) {
+       $this->emailUsuarioTar = $emailUsuarioTar;
    }
 
-   function setCodigoProjeto($codigoProjeto) {
-       $this->codigoProjeto = $codigoProjeto;
+   public function setCodigoProjetoTar($codigoProjetoTar) {
+       $this->codigoProjetoTar = $codigoProjetoTar;
    }
+
+   public function getNomeUsuarioTar() {
+       return $this->nomeUsuarioTar;
+   }
+
+   public function getTelUsuarioTar() {
+       return $this->telUsuarioTar;
+   }
+
+   public function setNomeUsuarioTar($nomeUsuarioTar) {
+       $this->nomeUsuarioTar = $nomeUsuarioTar;
+   }
+
+   public function setTelUsuarioTar($telUsuarioTar) {
+       $this->telUsuarioTar = $telUsuarioTar;
+   }
+
 
 }

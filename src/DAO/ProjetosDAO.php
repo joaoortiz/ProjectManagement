@@ -29,13 +29,13 @@ class ProjetosDAO {
                 
                 $tmpProjeto = new Projetos();
                 
-                $tmpProjeto->setCodigo($dados['codigo_PROJETO']);
-                $tmpProjeto->setNome($dados['nome_PROJETO']);
-                $tmpProjeto->setDescricao($dados['descricao_PROJETO']);
-                $tmpProjeto->setInicio($dados['inicio_PROJETO']);
-                $tmpProjeto->setFim($dados['fim_PROJETO']);
-                $tmpProjeto->setStatus($dados['status_PROJETO']);
-                $tmpProjeto->setEmailUsuario($dados['emailUsuario_PROJETO']);
+                $tmpProjeto->setCodigoProj($dados['codigo_PROJETO']);
+                $tmpProjeto->setNomeProj($dados['nome_PROJETO']);
+                $tmpProjeto->setDescricaoProj($dados['descricao_PROJETO']);
+                $tmpProjeto->setInicioProj($dados['inicio_PROJETO']);
+                $tmpProjeto->setFimProj($dados['fim_PROJETO']);
+                $tmpProjeto->setStatusProj($dados['status_PROJETO']);
+                $tmpProjeto->setEmailUsuarioProj($dados['emailUsuario_PROJETO']);
                 $tmpProjeto->setCodigoCategoria($dados['codigo_CATEGORIA']);
                 $tmpProjeto->setNomeCategoria($dados['nome_CATEGORIA']);
                 
@@ -63,11 +63,11 @@ class ProjetosDAO {
         $sqlCadProj .= "inicio_PROJETO, fim_PROJETO,";
         $sqlCadProj .= "status_PROJETO, emailUsuario_PROJETO,";
         $sqlCadProj .= "codigoCategoria_PROJETO) values(";
-        $sqlCadProj .= "'" . $tmpProjeto->getNome() . "',";
-        $sqlCadProj .= "'" . $tmpProjeto->getDescricao() . "',";
-        $sqlCadProj .= "'" . $tmpProjeto->getInicio() . "',";
-        $sqlCadProj .= "'" . $tmpProjeto->getFim() . "',0,";
-        $sqlCadProj .= "'" . $tmpProjeto->getEmailUsuario() . "',";
+        $sqlCadProj .= "'" . $tmpProjeto->getNomeProj() . "',";
+        $sqlCadProj .= "'" . $tmpProjeto->getDescricaoProj() . "',";
+        $sqlCadProj .= "'" . $tmpProjeto->getInicioProj() . "',";
+        $sqlCadProj .= "'" . $tmpProjeto->getFimProj() . "',0,";
+        $sqlCadProj .= "'" . $tmpProjeto->getEmailUsuarioProj() . "',";
         $sqlCadProj .= $tmpProjeto->getCodigoCategoria() . ")";
         
         //executando o INSERT
@@ -91,12 +91,12 @@ class ProjetosDAO {
         
         $tmpProjeto = new Projetos();
         
-        $tmpProjeto->setCodigo($tblProj['codigo_PROJETO']);
-        $tmpProjeto->setNome($tblProj['nome_PROJETO']);
-        $tmpProjeto->setDescricao($tblProj['descricao_PROJETO']);
-        $tmpProjeto->setInicio($tblProj['inicio_PROJETO']);
-        $tmpProjeto->setFim($tblProj['fim_PROJETO']);
-        $tmpProjeto->setEmailUsuario($tblProj['emailUsuario_PROJETO']);
+        $tmpProjeto->setCodigoProj($tblProj['codigo_PROJETO']);
+        $tmpProjeto->setNomeProj($tblProj['nome_PROJETO']);
+        $tmpProjeto->setDescricaoProj($tblProj['descricao_PROJETO']);
+        $tmpProjeto->setInicioProj($tblProj['inicio_PROJETO']);
+        $tmpProjeto->setFimProj($tblProj['fim_PROJETO']);
+        $tmpProjeto->setEmailUsuarioProj($tblProj['emailUsuario_PROJETO']);
                         
                         
         return $tmpProjeto;
@@ -139,18 +139,24 @@ class ProjetosDAO {
     public static function calcularProgresso($tmpCodigo){
         
         $total = TarefasDAO::listarTarefas(0, $tmpCodigo,"");
-        $concluidas = TarefasDAO::listarTarefas(1, $tmpCodigo,"");
+        $fin = 0;
+        
+        for($i=0;$i<count($total);$i++){
+            if($total[$i]->getStatusTar() == 1){
+                $fin++;
+            }
+        }
+        
                 
         if($total == null){
             return 0;
         }else{
-            $total = count($total);
-            $concluidas = count($concluidas);
+            $total = count($total);            
             
-            if($concluidas == 0){
+            if($fin == 0){
                 return 0;
             }else{
-                $prog = $concluidas/$total;
+                $prog = $fin/$total;
                 return number_format($prog * 100,0);
             }
         }        

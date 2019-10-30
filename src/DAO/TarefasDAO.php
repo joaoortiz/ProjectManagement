@@ -14,11 +14,11 @@ class TarefasDAO {
         $sqlCadTar .= "data_TAREFA, status_TAREFA,";
         $sqlCadTar .= "emailUsuario_TAREFA, codigoProjeto_TAREFA)";
         $sqlCadTar .= "values(";
-        $sqlCadTar .= "'" . $tmpTarefa->getNome() . "',";
-        $sqlCadTar .= "'" . $tmpTarefa->getDescricao() . "',";
-        $sqlCadTar .= "'" . $tmpTarefa->getData() . "',0,";
-        $sqlCadTar .= "'" . $tmpTarefa->getEmailUsuario() . "',";
-        $sqlCadTar .= $tmpTarefa->getCodigoProjeto() . ")";
+        $sqlCadTar .= "'" . $tmpTarefa->getNomeTar() . "',";
+        $sqlCadTar .= "'" . $tmpTarefa->getDescricaoTar() . "',";
+        $sqlCadTar .= "'" . $tmpTarefa->getDataTar() . "',0,";
+        $sqlCadTar .= "'" . $tmpTarefa->getEmailUsuarioTar() . "',";
+        $sqlCadTar .= $tmpTarefa->getCodigoProjetoTar() . ")";
 
         mysqli_query($vConn, $sqlCadTar) or die(mysqli_error($vConn));
     }
@@ -27,11 +27,11 @@ class TarefasDAO {
         //PROGRAMAR
         $vConn = ConexaoDAO::abrirConexao();
         if ($tmpTipo == 0) { //todas
-            $sqlLista = "Select * from TAREFAS where codigoProjeto_TAREFA = '$tmpProj'";
+            $sqlLista = "Select * from tarefas T, projetos P, usuarios U where T.codigoProjeto_TAREFA = '$tmpProj' and T.codigoProjeto_TAREFA = P.codigo_PROJETO and T.emailUsuario_TAREFA = U.email_USUARIO";
         } else if ($tmpTipo == 1) {//finalizadas
-            $sqlLista = "Select * from TAREFAS where codigoProjeto_TAREFA = '$tmpProj' and status_TAREFA = 1";
+            $sqlLista = "Select * from tarefas T, projetos P, usuarios U where T.codigoProjeto_TAREFA = '$tmpProj' and T.codigoProjeto_TAREFA = P.codigo_PROJETO and T.status_TAREFA = 1 and T.emailUsuario_TAREFA = U.email_USUARIO";
         }else if($tmpTipo == 2){
-            $sqlLista = "Select * from TAREFAS T, PROJETOS P where T.emailUsuario_TAREFA like '$tmpEmail' and T.codigoProjeto_TAREFA = P.codigo_PROJETO order by T.codigoProjeto_TAREFA";
+            $sqlLista = "Select * from tarefas T, projetos P, usuarios U where T.emailUsuario_TAREFA like '$tmpEmail' and T.codigoProjeto_TAREFA = P.codigo_PROJETO and U.email_USUARIO = T.emailUsuario_TAREFA order by T.codigoProjeto_TAREFA";
         }
 
         $rsLista = mysqli_query($vConn, $sqlLista)
@@ -46,13 +46,16 @@ class TarefasDAO {
                 $tmpTarefa = new Tarefas();
 
                 //preenchendo objeto
-                $tmpTarefa->setCodigo($dados['codigo_TAREFA']);
-                $tmpTarefa->setNome($dados['nome_TAREFA']);
-                $tmpTarefa->setDescricao($dados['descricao_TAREFA']);
-                $tmpTarefa->setData($dados['data_TAREFA']);
-                $tmpTarefa->setStatus($dados['status_TAREFA']);
-                $tmpTarefa->setEmailUsuario($dados['emailUsuario_TAREFA']);
-                $tmpTarefa->setCodigoProjeto($dados['codigoProjeto_TAREFA']);
+                $tmpTarefa->setCodigoTar($dados['codigo_TAREFA']);
+                $tmpTarefa->setNomeTar($dados['nome_TAREFA']);
+                $tmpTarefa->setDescricaoTar($dados['descricao_TAREFA']);
+                $tmpTarefa->setDataTar($dados['data_TAREFA']);
+                $tmpTarefa->setStatusTar($dados['status_TAREFA']);
+                $tmpTarefa->setEmailUsuarioTar($dados['emailUsuario_TAREFA']);
+                $tmpTarefa->setCodigoProjetoTar($dados['codigoProjeto_TAREFA']);
+                $tmpTarefa->setNomeProj($dados['nome_PROJETO']);
+                $tmpTarefa->setNomeUsuarioTar($dados['nome_USUARIO']);
+                $tmpTarefa->setTelUsuarioTar($dados['telefone_USUARIO']);
                 
 
                 $itens->append($tmpTarefa);
@@ -64,8 +67,8 @@ class TarefasDAO {
     public static function consultarTarefa($tmpCodigo) {
         $vConn = ConexaoDAO:: abrirConexao();
 
-        $sqlTar = "Select * from Tarefas T where ";
-        $sqlTar .= "T.codigo_TAREFA = '$tmpCodigo'";
+        $sqlTar = "Select * from usuarios U, tarefas T, projetos P where ";
+        $sqlTar .= "T.codigo_TAREFA = '$tmpCodigo' and T.codigoProjeto_TAREFA = P.codigo_PROJETO and U.email_USUARIO = T.emailUsuario_TAREFA";
 
         $rsTar = mysqli_query($vConn, $sqlTar)
                 or die(mysqli_error($vConn));
@@ -74,12 +77,14 @@ class TarefasDAO {
 
         $tmpTarefa = new Tarefas();
 
-        $tmpTarefa->setCodigo($tblTar['codigo_TAREFA']);
-        $tmpTarefa->setNome($tblTar['nome_TAREFA']);
-        $tmpTarefa->setDescricao($tblTar['descricao_TAREFA']);
-        $tmpTarefa->setData($tblTar['data_TAREFA']);
-        $tmpTarefa->setStatus($tblTar['status_TAREFA']);
-        $tmpTarefa->setEmailUsuario($tblTar['emailUsuario_TAREFA']);
+        $tmpTarefa->setCodigoTar($tblTar['codigo_TAREFA']);
+        $tmpTarefa->setNomeTar($tblTar['nome_TAREFA']);
+        $tmpTarefa->setDescricaoTar($tblTar['descricao_TAREFA']);
+        $tmpTarefa->setDataTar($tblTar['data_TAREFA']);
+        $tmpTarefa->setStatusTar($tblTar['status_TAREFA']);
+        $tmpTarefa->setEmailUsuarioTar($tblTar['emailUsuario_TAREFA']);
+        $tmpTarefa->setNomeUsuarioTar($tblTar['nome_USUARIO']);
+        $tmpTarefa->setNomeProj($tblTar['nome_PROJETO']);
 
 
         return $tmpTarefa;
@@ -106,7 +111,7 @@ class TarefasDAO {
     public static function cadastrarArquivo($tmpArquivo) {
         $vConn = ConexaoDAO::abrirConexao();
         $sqlArquivo = "Insert into arquivos(nome_ARQUIVO, data_ARQUIVO, codigoTarefa_ARQUIVO) values(";
-        $sqlArquivo.= "'" . $tmpArquivo->getNome() . "','" . $tmpArquivo->getData() . "'," . $tmpArquivo->getCodigoTarefa() . ")";
+        $sqlArquivo.= "'" . $tmpArquivo->getNomeArq() . "','" . $tmpArquivo->getDataArq() . "'," . $tmpArquivo->getCodigoTarefaArq() . ")";
 
         mysqli_query($vConn, $sqlArquivo) or die(mysqli_error($vConn));
     }
@@ -145,10 +150,10 @@ class TarefasDAO {
                 $tmpArquivo = new Arquivos();
 
                 //preenchendo objeto
-                $tmpArquivo->setCodigo($dados['codigo_ARQUIVO']);
-                $tmpArquivo->setNome($dados['nome_ARQUIVO']);
-                $tmpArquivo->setData($dados['data_ARQUIVO']);
-                $tmpArquivo->setCodigoTarefa($dados['codigoTarefa_ARQUIVO']);
+                $tmpArquivo->setCodigoArq($dados['codigo_ARQUIVO']);
+                $tmpArquivo->setNomeArq($dados['nome_ARQUIVO']);
+                $tmpArquivo->setDataArq($dados['data_ARQUIVO']);
+                $tmpArquivo->setCodigoTarefaArq($dados['codigoTarefa_ARQUIVO']);
                 
                 $itens->append($tmpArquivo);
             }//fechando while           
@@ -170,10 +175,10 @@ class TarefasDAO {
         
         if(mysqli_num_rows($rsArq)){
             while($dados = mysqli_fetch_array($rsArq)){
-                $tmpArquivo->setCodigo($dados['codigo_ARQUIVO']);
-                $tmpArquivo->setNome($dados['nome_ARQUIVO']);
-                $tmpArquivo->setData($dados['data_ARQUIVO']);
-                $tmpArquivo->setCodigoTarefa($dados['codigoTarefa_ARQUIVO']);
+                $tmpArquivo->setCodigoArq($dados['codigo_ARQUIVO']);
+                $tmpArquivo->setNomeArq($dados['nome_ARQUIVO']);
+                $tmpArquivo->setDataArq($dados['data_ARQUIVO']);
+                $tmpArquivo->setCodigoTarefaArq($dados['codigoTarefa_ARQUIVO']);
             }
         }
         

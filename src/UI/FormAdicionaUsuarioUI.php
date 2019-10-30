@@ -8,7 +8,7 @@
 
         <h5>
             <i class="fa fa-user-plus fa-lg fa-fw text-white"></i>
-            <?=$texto[$lang]['card_addmember'];?> - <?=$tmpProjeto->getNome();?>
+            <?=$texto[$lang]['card_addmember'];?> - <?=$tmpProjeto->getNomeProj();?>
 
         </h5>
     </div>

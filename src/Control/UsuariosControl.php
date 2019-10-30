@@ -14,7 +14,7 @@ if(isset($_POST['acao'])){
     $acao = $_GET['acao'];
 }
 
-if($acao == 1){
+if($acao == 1){ //LOGIN
     //validar
     $email = $_POST['HTML_email'];
     $senha = $_POST['HTML_senha'];
@@ -23,9 +23,9 @@ if($acao == 1){
     
     if($tmpUsuario != null){
         //abrindo sessão do usuario
-        $_SESSION['nome'] = $tmpUsuario->getNome();
-        $_SESSION['email'] = $tmpUsuario->getEmail();
-        $_SESSION['telefone'] = $tmpUsuario->getTelefone();
+        $_SESSION['nome'] = $tmpUsuario->getNomeUsu();
+        $_SESSION['email'] = $tmpUsuario->getEmailUsu();
+        $_SESSION['telefone'] = $tmpUsuario->getTelefoneUsu();
         $_SESSION['statusLogin'] = 1; //certifica que logou
         
         echo "<script>location.href='../UI/HomeUsuariosUI.php';</script>";
@@ -38,7 +38,7 @@ if($acao == 1){
     
     
     
-}else if($acao == 2){
+}else if($acao == 2){ //CADASTRO
     //cadastrar
     
     //resgatando dados digitados no form
@@ -51,10 +51,10 @@ if($acao == 1){
     $tmpUsuario = new Usuarios();
     
     //preenchendo objeto
-    $tmpUsuario->setEmail($email);
-    $tmpUsuario->setNome($nome);
-    $tmpUsuario->setSenha($senha);
-    $tmpUsuario->setTelefone($telefone);
+    $tmpUsuario->setEmailUsu($email);
+    $tmpUsuario->setNomeUsu($nome);
+    $tmpUsuario->setSenhaUsu($senha);
+    $tmpUsuario->setTelefoneUsu($telefone);
     
     $statusCad =UsuariosDAO::cadastrarUsuario($tmpUsuario);//cadastrando
     
@@ -66,12 +66,12 @@ if($acao == 1){
     echo "<script>location.href='../../index.php';</script>";//redirecionando
     
     //header("location:../../index.php");
-}else if($acao == 3){
+}else if($acao == 3){ //LOGOFF
     //logoff
     session_destroy();
     echo "<script>location.href='../../index.php';</script>";//redirecionando
     
-}else if($acao == 4){
+}else if($acao == 4){ //ADICIONAR USUARIO NO PROJETO
    //addUsuario
     $email = $_GET['HTML_email'];
     $cod = $_GET['cod'];
@@ -85,6 +85,11 @@ if($acao == 1){
         echo "<script>alert('Integrante adicionado ao projeto.');</script>";
     }
     echo "<script>location.href='../UI/DetalhesProjetoUI.php?cod=".$cod."';</script>";//redirecionando
+
+
+}else if($acao == 5){ //ENVIAR E-MAIL
+ echo "";
 }
+    
 
 ?>

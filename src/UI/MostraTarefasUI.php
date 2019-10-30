@@ -28,22 +28,17 @@ $itens = TarefasDAO::listarTarefas(0, $proj,"");
                         
                         <tr>
                             <td>
-                                <a href="DetalhesTarefaUI.php?proj=<?=$proj;?>&tar=<?=$itens[$i]->getCodigo();?>">
-                                    <?=$itens[$i]->getNome();?>
+                                <a href="DetalhesTarefaUI.php?proj=<?=$proj;?>&tar=<?=$itens[$i]->getCodigoTar();?>">
+                                    <?=$itens[$i]->getNomeTar();?>
                                 </a>
                             </td>
                                                         
-                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getData());?></td>
-                            
-                                <?php
-                                    $user = $itens[$i]->getEmailUsuario();
-                                    $tmpUsuario = UsuariosDAO::consultarUsuario($user);
-                                    $nome = $tmpUsuario->getNome();
-                                ?>
-                            <td><?=$nome;?></td>
+                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getDataTar());?></td>
+                                                            
+                            <td><?=$itens[$i]->getNomeUsuarioTar();?></td>
                             <td>                                
                                 <?php
-                                    if($itens[$i]->getStatus() == 0)
+                                    if($itens[$i]->getStatusTar() == 0)
                                         echo $texto[$lang]['text_tasknofinished'];
                                     else
                                         echo $texto[$lang]['text_taskfinished'];

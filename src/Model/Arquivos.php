@@ -2,40 +2,39 @@
 
 class Arquivos {
     
-    private $codigo, $nome, $data, $codigoTarefa;
+    private $codigoArq, $nomeArq, $dataArq, $codigoTarefaArq;
     
-    function getCodigo() {
-        return $this->codigo;
+    public function getCodigoArq() {
+        return $this->codigoArq;
     }
 
-    function getNome() {
-        return $this->nome;
+    public function getNomeArq() {
+        return $this->nomeArq;
     }
 
-    function getData() {
-        return $this->data;
+    public function getDataArq() {
+        return $this->dataArq;
     }
 
-    function getCodigoTarefa() {
-        return $this->codigoTarefa;
+    public function getCodigoTarefaArq() {
+        return $this->codigoTarefaArq;
     }
 
-    function setCodigo($codigo) {
-        $this->codigo = $codigo;
+    public function setCodigoArq($codigoArq) {
+        $this->codigoArq = $codigoArq;
     }
 
-    function setNome($nome) {
-        $this->nome = $nome;
+    public function setNomeArq($nomeArq) {
+        $this->nomeArq = $nomeArq;
     }
 
-    function setData($data) {
-        $this->data = $data;
+    public function setDataArq($dataArq) {
+        $this->dataArq = $dataArq;
     }
 
-    function setCodigoTarefa($codigoTarefa) {
-        $this->codigoTarefa = $codigoTarefa;
+    public function setCodigoTarefaArq($codigoTarefaArq) {
+        $this->codigoTarefaArq = $codigoTarefaArq;
     }
 
 
-    
 }

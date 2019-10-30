@@ -11,7 +11,7 @@ require_once "../DAO/ProjetosDAO.php";
 
 $cod = $_GET['cod']; //identificar o Projeto
 $tmpProjeto = ProjetosDAO::consultarProjeto($cod);
-$tmpUsuario = UsuariosDAO::consultarUsuario($tmpProjeto->getEmailUsuario());
+$tmpUsuario = UsuariosDAO::consultarUsuario($tmpProjeto->getEmailUsuarioProj());
 
 $itens = UsuariosDAO::listarIntegrantes($cod);
 ?>
@@ -35,7 +35,7 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
                 <form action="../Control/TarefasControl.php" method="post">
                 
                     <div class="form-group">
-                        <h5><?=$texto[$lang]['pholder_projname'];?>: <?=$tmpProjeto->getNome();?></h5>
+                        <h5><?=$texto[$lang]['pholder_projname'];?>: <?=$tmpProjeto->getNomeProj();?></h5>
                     </div>
                     <div class="form-group">
                         <input type="text" name="HTML_nome" placeholder="<?=$texto[$lang]['pholder_taskname'];?>" class="form-control">
@@ -47,13 +47,13 @@ $itens = UsuariosDAO::listarIntegrantes($cod);
                     <div class="form-group">
                         <select name="HTML_usuario" class="form-control">
                             <option><?=$texto[$lang]['pholder_taskresp'];?></option>
-                            <option value="<?=$tmpUsuario->getEmail();?>"><?=$tmpUsuario->getNome();?></option>
+                            <option value="<?=$tmpUsuario->getEmailUsu();?>"><?=$tmpUsuario->getNomeUsu();?></option>
                             
                             <?php
                                 for($i=0; $i<count($itens); $i++){
                             ?>
-                            <option value="<?=$itens[$i]->getEmail();?>">
-                                <?=$itens[$i]->getNome();?>
+                            <option value="<?=$itens[$i]->getEmailUsu();?>">
+                                <?=$itens[$i]->getNomeUsu();?>
                             </option>
                             
                              <?php                           

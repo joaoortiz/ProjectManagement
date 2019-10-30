@@ -28,11 +28,11 @@ if ($acao == 1) {
 
     //instanciar obj Tarefa e dps preenchendo
     $tmpTarefa = new Tarefas();
-    $tmpTarefa->setNome($nome);
-    $tmpTarefa->setDescricao($descricao);
-    $tmpTarefa->setData($data);
-    $tmpTarefa->setEmailUsuario($usuario);
-    $tmpTarefa->setCodigoProjeto($codigo);
+    $tmpTarefa->setNomeTar($nome);
+    $tmpTarefa->setDescricaoTar($descricao);
+    $tmpTarefa->setDataTar($data);
+    $tmpTarefa->setEmailUsuarioTar($usuario);
+    $tmpTarefa->setCodigoProjetoTar($codigo);
 
     TarefasDAO::cadastrarTarefa($tmpTarefa);
 

@@ -2,65 +2,66 @@
 require_once "Categorias.php";
 
 class Projetos extends Categorias{ //projetos herda categorias
-    private $codigo, $nome, $descricao, $inicio, $fim, $status, $emailUsuario;
+    private $codigoProj, $nomeProj, $descricaoProj, $inicioProj, $fimProj, $statusProj, $emailUsuarioProj;
     
-    function getCodigo() {
-        return $this->codigo;
+    public function getCodigoProj() {
+        return $this->codigoProj;
     }
 
-    function getNome() {
-        return $this->nome;
+    public function getNomeProj() {
+        return $this->nomeProj;
     }
 
-    function getDescricao() {
-        return $this->descricao;
+    public function getDescricaoProj() {
+        return $this->descricaoProj;
     }
 
-    function getInicio() {
-        return $this->inicio;
+    public function getInicioProj() {
+        return $this->inicioProj;
     }
 
-    function getFim() {
-        return $this->fim;
+    public function getFimProj() {
+        return $this->fimProj;
     }
 
-    function getStatus() {
-        return $this->status;
+    public function getStatusProj() {
+        return $this->statusProj;
     }
 
-    function getEmailUsuario() {
-        return $this->emailUsuario;
+    public function getEmailUsuarioProj() {
+        return $this->emailUsuarioProj;
     }
 
-    function setCodigo($codigo) {
-        $this->codigo = $codigo;
+    public function setCodigoProj($codigoProj) {
+        $this->codigoProj = $codigoProj;
     }
 
-    function setNome($nome) {
-        $this->nome = $nome;
+    public function setNomeProj($nomeProj) {
+        $this->nomeProj = $nomeProj;
     }
 
-    function setDescricao($descricao) {
-        $this->descricao = $descricao;
+    public function setDescricaoProj($descricaoProj) {
+        $this->descricaoProj = $descricaoProj;
     }
 
-    function setInicio($inicio) {
-        $this->inicio = $inicio;
+    public function setInicioProj($inicioProj) {
+        $this->inicioProj = $inicioProj;
     }
 
-    function setFim($fim) {
-        $this->fim = $fim;
+    public function setFimProj($fimProj) {
+        $this->fimProj = $fimProj;
     }
 
-    function setStatus($status) {
-        $this->status = $status;
+    public function setStatusProj($statusProj) {
+        $this->statusProj = $statusProj;
     }
 
-    function setEmailUsuario($emailUsuario) {
-        $this->emailUsuario = $emailUsuario;
+    public function setEmailUsuarioProj($emailUsuarioProj) {
+        $this->emailUsuarioProj = $emailUsuarioProj;
     }
 
-   
+
+    
 }
 
 ?>

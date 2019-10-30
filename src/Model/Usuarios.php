@@ -2,42 +2,41 @@
 
 class Usuarios {
  
-    private $nome, $email, $senha, $telefone;
-    
-    function getNome() {
-        return $this->nome;
+    private $nomeUsu, $emailUsu, $senhaUsu, $telefoneUsu;
+
+    public function getNomeUsu() {
+        return $this->nomeUsu;
     }
 
-    function getEmail() {
-        return $this->email;
+    public function getEmailUsu() {
+        return $this->emailUsu;
     }
 
-    function getSenha() {
-        return $this->senha;
+    public function getSenhaUsu() {
+        return $this->senhaUsu;
     }
 
-    function getTelefone() {
-        return $this->telefone;
+    public function getTelefoneUsu() {
+        return $this->telefoneUsu;
     }
 
-    function setNome($nome) {
-        $this->nome = $nome;
+    public function setNomeUsu($nomeUsu) {
+        $this->nomeUsu = $nomeUsu;
     }
 
-    function setEmail($email) {
-        $this->email = $email;
+    public function setEmailUsu($emailUsu) {
+        $this->emailUsu = $emailUsu;
     }
 
-    function setSenha($senha) {
-        $this->senha = $senha;
+    public function setSenhaUsu($senhaUsu) {
+        $this->senhaUsu = $senhaUsu;
     }
 
-    function setTelefone($telefone) {
-        $this->telefone = $telefone;
+    public function setTelefoneUsu($telefoneUsu) {
+        $this->telefoneUsu = $telefoneUsu;
     }
 
 
-    
     
 }
 ?>

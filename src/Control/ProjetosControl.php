@@ -21,11 +21,11 @@ if($acao == 1){
     
     //instanciar obj Projeto e dps preenchendo
     $tmpProjeto = new Projetos();
-    $tmpProjeto->setNome($nome);
-    $tmpProjeto->setDescricao($descricao);
-    $tmpProjeto->setInicio($inicio);
-    $tmpProjeto->setFim($fim);
-    $tmpProjeto->setEmailUsuario($email);
+    $tmpProjeto->setNomeProj($nome);
+    $tmpProjeto->setDescricaoProj($descricao);
+    $tmpProjeto->setInicioProj($inicio);
+    $tmpProjeto->setFimProj($fim);
+    $tmpProjeto->setEmailUsuarioProj($email);
     $tmpProjeto->setCodigoCategoria($cat);
     
     ProjetosDAO::cadastrarProjeto($tmpProjeto);

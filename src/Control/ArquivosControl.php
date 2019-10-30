@@ -7,8 +7,8 @@ require_once "../DAO/TarefasDAO.php";
 if(isset($_GET['acao'])){
    $arq = $_GET['arq'];
    $tmpArquivo = TarefasDAO::consultarArquivo($arq);   
-   $nomeArq = $tmpArquivo->getNome();
-   $codTar = $tmpArquivo->getCodigoTarefa();
+   $nomeArq = $tmpArquivo->getNomeArq();
+   $codTar = $tmpArquivo->getCodigoTarefaArq();
    $codProj = $_GET['proj'];
     
    unlink("../../files/".$codTar."/".$nomeArq);
@@ -37,9 +37,9 @@ if (!in_array(strtolower($ext), $tiposPermitidos)) {
 
 $hoje=date("Y-m-d");
 
-$tmpArquivo->setNome($codTar."_".$nomeArquivo);
-$tmpArquivo->setData($hoje);
-$tmpArquivo->setCodigoTarefa($codTar);
+$tmpArquivo->setNomeArq($codTar."_".$nomeArquivo);
+$tmpArquivo->setDataArq($hoje);
+$tmpArquivo->setCodigoTarefaArq($codTar);
 
 TarefasDAO::cadastrarArquivo($tmpArquivo);
 

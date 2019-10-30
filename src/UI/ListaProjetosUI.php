@@ -45,13 +45,13 @@ $itens = ProjetosDAO::listarProjetos(1, $email,"");
                         
                         <tr>
                             <td>
-                                <a href="DetalhesProjetoUI.php?cod=<?=$itens[$i]->getCodigo();?>">
-                                    <?=$itens[$i]->getNome();?>
+                                <a href="DetalhesProjetoUI.php?cod=<?=$itens[$i]->getCodigoProj();?>">
+                                    <?=$itens[$i]->getNomeProj();?>
                                 </a>
                             </td>
                                                         
-                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getInicio());?></td>
-                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getFim());?></td>
+                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getInicioProj());?></td>
+                            <td><?=ProjetosDAO::corrigirData($itens[$i]->getFimProj());?></td>
                             
                             <td><?=$itens[$i]->getNomeCategoria();?></td>
                             <td></td>

@@ -10,7 +10,7 @@ class UsuariosDAO {
     public static function cadastrarUsuario($tmpUsuario) {
 
         $vConn = ConexaoDAO::abrirConexao();
-        $email = $tmpUsuario->getEmail();
+        $email = $tmpUsuario->getEmailUsu();
 
         $sqlVerifica = "Select * from Usuarios where email_USUARIO like '$email'";
         $rsVerifica = mysqli_query($vConn, $sqlVerifica) or die(mysqli_error($vConn));
@@ -23,10 +23,10 @@ class UsuariosDAO {
             $sqlCadastra .= "email_USUARIO, nome_USUARIO,";
             $sqlCadastra .= "senha_USUARIO,telefone_USUARIO)";
             $sqlCadastra .= "values(";
-            $sqlCadastra .= "'" . $tmpUsuario->getEmail() . "',";
-            $sqlCadastra .= "'" . $tmpUsuario->getNome() . "',";
-            $sqlCadastra .= "'" . md5($tmpUsuario->getSenha()) . "',";
-            $sqlCadastra .= "'" . $tmpUsuario->getTelefone() . "')";
+            $sqlCadastra .= "'" . $tmpUsuario->getEmailUsu() . "',";
+            $sqlCadastra .= "'" . $tmpUsuario->getNomeUsu() . "',";
+            $sqlCadastra .= "'" . md5($tmpUsuario->getSenhaUsu()) . "',";
+            $sqlCadastra .= "'" . $tmpUsuario->getTelefoneUsu() . "')";
 
             //executando SQL e interrompendo a execução do metodo
             //em caso de erro
@@ -56,9 +56,9 @@ class UsuariosDAO {
 
             $tmpUsuario = new Usuarios();
             //preenchendo objeto
-            $tmpUsuario->setEmail($dados['email_USUARIO']);
-            $tmpUsuario->setNome($dados['nome_USUARIO']);
-            $tmpUsuario->setTelefone($dados['telefone_USUARIO']);
+            $tmpUsuario->setEmailUsu($dados['email_USUARIO']);
+            $tmpUsuario->setNomeUsu($dados['nome_USUARIO']);
+            $tmpUsuario->setTelefoneUsu($dados['telefone_USUARIO']);
 
             return $tmpUsuario;
         } else {
@@ -86,9 +86,9 @@ class UsuariosDAO {
 
                 $tmpUsuario = new Usuarios();
 
-                $tmpUsuario->setEmail($dados['email_USUARIO']);
-                $tmpUsuario->setNome($dados['nome_USUARIO']);
-                $tmpUsuario->setTelefone($dados['telefone_USUARIO']);
+                $tmpUsuario->setEmailUsu($dados['email_USUARIO']);
+                $tmpUsuario->setNomeUsu($dados['nome_USUARIO']);
+                $tmpUsuario->setTelefoneUsu($dados['telefone_USUARIO']);
 
                 $itens->append($tmpUsuario);
             }//fechando while
@@ -133,9 +133,9 @@ class UsuariosDAO {
         $tmpUsuario = new Usuarios();
 
         $tblUsuario = mysqli_fetch_array($rsUsuario);
-        $tmpUsuario->setEmail($tblUsuario['email_USUARIO']);
-        $tmpUsuario->setNome($tblUsuario['nome_USUARIO']);
-        $tmpUsuario->setTelefone($tblUsuario['telefone_USUARIO']);
+        $tmpUsuario->setEmailUsu($tblUsuario['email_USUARIO']);
+        $tmpUsuario->setNomeUsu($tblUsuario['nome_USUARIO']);
+        $tmpUsuario->setTelefoneUsu($tblUsuario['telefone_USUARIO']);
 
         return $tmpUsuario;
     }

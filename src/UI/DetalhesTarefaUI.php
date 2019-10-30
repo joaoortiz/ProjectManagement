@@ -4,7 +4,6 @@
 include "../../assets/php/lang.php";
 $texto = translatePg();
 
-require_once "../Model/Projetos.php";
 require_once "../DAO/ProjetosDAO.php";
 require_once "../Model/Tarefas.php";
 require_once "../DAO/TarefasDAO.php";
@@ -15,13 +14,12 @@ require_once "../DAO/UsuariosDAO.php";
 
 $proj = $_GET['proj'];
 $tar = $_GET['tar'];
-$tmpProjeto = ProjetosDAO::consultarProjeto($proj);
-$adm = $tmpProjeto->getEmailUsuario();
 $tmpTarefa = TarefasDAO::consultarTarefa($tar);
-$tmpUsuario = UsuariosDAO::consultarUsuario($tmpTarefa->getEmailUsuario());
+$adm = $tmpTarefa->getEmailUsuarioTar();
+$tmpAdm = UsuariosDAO::consultarUsuario($adm);
 $itens = TarefasDAO::listarArquivos($tar);
 
-if ($tmpTarefa->getStatus() == 0) {
+if ($tmpTarefa->getStatusTar() == 0) {
     $status = $texto[$lang]['text_tasknofinished'];
 } else {
     $status = $texto[$lang]['text_taskfinished'];
@@ -45,7 +43,7 @@ if ($tmpTarefa->getStatus() == 0) {
                 <div class="card-header bg-primary-dark text-white">
 
                     <h5><i class="fa fa-file-text fa-fw text-white"></i>
-                        <a class="text-white" href="DetalhesProjetoUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>"><?= $tmpProjeto->getNome(); ?></h5></a>
+                        <a class="text-white" href="DetalhesProjetoUI.php?cod=<?= $proj; ?>"><?= $tmpTarefa->getNomeProj(); ?></h5></a>
                 </div>
                 <div class="card-body">
 
@@ -53,24 +51,24 @@ if ($tmpTarefa->getStatus() == 0) {
                         <div class="card-header bg-primary-shadow text-white">
                             <h5> 
                                 <i class="fa fa-list fa-fw fa-lg text-white"></i>
-                                <?= $tmpTarefa->getNome(); ?> - <?= ProjetosDAO::corrigirData($tmpTarefa->getData()); ?> </h5>                       
+                                <?= $tmpTarefa->getNomeTar(); ?> - <?= ProjetosDAO::corrigirData($tmpTarefa->getDataTar()); ?> </h5>                       
                         </div>
                         <div class="card-body">
 
-                            <?= $tmpTarefa->getDescricao(); ?><br>
+                            <?= $tmpTarefa->getDescricaoTar(); ?><br>
                             Status: <b><?= $status; ?></b><br>
                             <?php
                             if ($adm == $_SESSION['email']) {
 
-                                if ($tmpTarefa->getStatus() == 0) {
+                                if ($tmpTarefa->getStatusTar() == 0) {
                                     ?>
-                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpProjeto->getCodigo(); ?>&tar=<?= $tmpTarefa->getCodigo(); ?>&acao=3" class="btn btn-warning float-right text-white">
+                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white">
                                         <i class="fa fa-thumbs-up fa-fw fa-lg"></i>
                                         <?= $texto[$lang]['btn_finish']; ?>
                                     </a>
                                 <?php } else { ?>
 
-                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpProjeto->getCodigo(); ?>&tar=<?= $tmpTarefa->getCodigo(); ?>&acao=3" class="btn btn-warning float-right text-white">
+                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white">
                                         <i class="fa fa-thumbs-down fa-fw fa-lg"></i>
                                         <?= $texto[$lang]['btn_reopen']; ?>
                                     </a>
@@ -83,28 +81,41 @@ if ($tmpTarefa->getStatus() == 0) {
                     </div>
                     <div class="row">
                         <div class="col-md-5">
+                            <?php
+                            if($tmpTarefa->getEmailUsuarioTar() == $_SESSION['email']){
+                                $titCard = $texto[$lang]['card_email_adm'];
+                                $nomeDest = $tmpAdm->getNomeUsu();
+                                $emailDest = $adm;
+                            }else{
+                                $titCard = $texto[$lang]['card_email_resp'];
+                                $nomeDest = $tmpTarefa->getNomeUsuarioTar();
+                                $emailDest = $tmpTarefa->getEmailUsuarioTar();
+                            }
+                            ?>
+                            
                             <div class="card" style="margin-top:15px;">
                                 <div class="card-header bg-primary-light text-white">
                                     <i class="fa fa-commenting-o fa-fw fa-lg text-white"></i>
-                                    <?= $texto[$lang]['card_email']; ?>
+                                    <?= $titCard; ?>
                                 </div>
                                 <div class="card-body">
-                                    <form>
+                                    <form action="../Control/UsuariosControl.php" method="get">
                                         <div class="form-group">
-                                            <h5><?= $tmpUsuario->getNome(); ?></h5>
-                                            <?= $tmpTarefa->getEmailUsuario(); ?>
+                                            <h5><?= $nomeDest; ?></h5>
+                                            <input type="text" value="<?= $emailDest; ?>" name="HTML_email" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <textarea class="form-control">                                            
                                             </textarea>
                                         </div>
                                         <div class="">
+                                            <input type="hidden" name="acao" value="5">
                                             <button type="submit" class="btn bg-primary-light form-control text-white">
                                                 <i class="fa fa-envelope fa-fw text-white"></i>
                                                 <?= $texto[$lang]['btn_email']; ?>
                                             </button>
                                             <hr>
-                                            <a href="https://web.whatsapp.com/send?phone=<?= $tmpUsuario->getTelefone(); ?>" target="_blank" class="btn btn-success form-control text-white">
+                                            <a href="https://web.whatsapp.com/send?phone=<?= $tmpTarefa->getTelUsuarioTar(); ?>" target="_blank" class="btn btn-success form-control text-white">
                                                 <i class="fa fa-whatsapp fa-lg fa-fw text-white"></i>
                                                 WhatsApp
                                             </a>
@@ -114,6 +125,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     </form>                            
                                 </div>                               
                             </div>
+                            
                         </div>
                         <div class="col-md-7">
                             <div class="card" style="margin-top:15px;">
@@ -127,7 +139,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                         //echo TarefasDAO::pegarUltimoArquivo($tar);
 
                                         for ($i = 0; $i < count($itens); $i++) {
-                                            $tipo = substr($itens[$i]->getNome(), count($itens[$i]->getNome()) - 4);
+                                            $tipo = substr($itens[$i]->getNomeArq(), count($itens[$i]->getNomeArq()) - 4);
 
                                             if ($tipo == "txt") {
                                                 $icon = "fa-file";
@@ -138,14 +150,14 @@ if ($tmpTarefa->getStatus() == 0) {
                                             <div class="col-md-2" style="text-align:center;">
                                                 <i class="fa fa-file-o fa-2x"></i>
                                                 
-                                                <a href="../Control/ArquivosControl.php?proj=<?=$proj?>&tar=<?=$tar?>&acao=2&arq=<?=$itens[$i]->getCodigo();?>">
+                                                <a href="../Control/ArquivosControl.php?proj=<?=$proj?>&tar=<?=$tar?>&acao=2&arq=<?=$itens[$i]->getCodigoArq();?>">
                                                     <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
                                                 </a>
                                                 
                                                 <br>
-                                                <a href="../../files/<?= $tmpTarefa->getCodigo(); ?>/<?= $itens[$i]->getNome(); ?>" target="_blank">
+                                                <a href="../../files/<?= $tmpTarefa->getCodigoTar(); ?>/<?= $itens[$i]->getNomeArq(); ?>" target="_blank">
                                                     <font style="font-size:10pt;">
-                                                        <?= $itens[$i]->getNome(); ?>                                                        
+                                                        <?= $itens[$i]->getNomeArq(); ?>                                                        
                                                     </font>
                                                 </a>
 
@@ -157,7 +169,7 @@ if ($tmpTarefa->getStatus() == 0) {
                                     </div>
 
                                     <hr>
-                                    <?php if ($tmpTarefa->getEmailUsuario() == $_SESSION['email']) { ?>
+                                    <?php if ($tmpTarefa->getEmailUsuarioTar() == $_SESSION['email']) { ?>
                                         <form action="../Control/ArquivosControl.php" method="POST" enctype="multipart/form-data">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -169,8 +181,8 @@ if ($tmpTarefa->getStatus() == 0) {
                                                 </div>
                                             </div><br>
                                             <div class="form-group">
-                                                <input type="hidden" name="codProjeto" value="<?= $tmpProjeto->getCodigo(); ?>">
-                                                <input type="hidden" name="codTarefa" value="<?= $tmpTarefa->getCodigo(); ?>">
+                                                <input type="hidden" name="codProjeto" value="<?= $tmpTarefa->getCodigoProjetoTar(); ?>">
+                                                <input type="hidden" name="codTarefa" value="<?= $tmpTarefa->getCodigoTar(); ?>">
                                                 <button type="submit" class="btn btn-primary float-right"><?= $texto[$lang]['btn_send']; ?></button>
                                             </div>
                                     </div>

@@ -40,21 +40,27 @@ $itens = TarefasDAO::listarTarefas(2, 0, $email);
                         if ($itens != null) {
 
                             for ($i = 0; $i < count($itens); $i++) {
-                                $dadosProj = ProjetosDAO::consultarProjeto($itens[$i]->getCodigoProjeto());
+                                $dadosProj = ProjetosDAO::consultarProjeto($itens[$i]->getCodigoProjetoTar());
+                                
+                                if($itens[$i]->getStatusTar() == 0){
+                                    $st = $texto[$lang]['text_tasknofinished'];;
+                                }else{
+                                    $st = $texto[$lang]['text_taskfinished'];;
+                                }
                                 ?>
 
                                 <tr>
                                     <td>
-                                        <a href="DetalhesTarefaUI.php?proj=<?= $dadosProj->getCodigo(); ?>&tar=<?= $itens[$i]->getCodigo(); ?>">
-                                            <?= $itens[$i]->getNome(); ?>
+                                        <a href="DetalhesTarefaUI.php?proj=<?= $dadosProj->getCodigoProj(); ?>&tar=<?= $itens[$i]->getCodigoTar(); ?>">
+                                            <?= $itens[$i]->getNomeTar(); ?>
                                         </a>
                                     </td>
 
-                                    <td><?= ProjetosDAO::corrigirData($itens[$i]->getData()); ?></td>
+                                    <td><?= ProjetosDAO::corrigirData($itens[$i]->getDataTar()); ?></td>
 
 
-                                    <td><?= $dadosProj->getNome(); ?></td>
-                                    <td><?= $itens[$i]->getStatus(); ?></td>
+                                    <td><?= $dadosProj->getNomeProj(); ?></td>
+                                    <td><?= $st; ?></td>
                                 </tr>
 
                                 <?php

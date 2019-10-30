@@ -10,10 +10,10 @@ require_once "../DAO/UsuariosDAO.php";
 
 $proj = $_GET['cod'];
 $tmpProjeto = ProjetosDAO::consultarProjeto($proj);
-$tmpUsuario = UsuariosDAO::consultarUsuario($tmpProjeto->getEmailUsuario());
+$tmpUsuario = UsuariosDAO::consultarUsuario($tmpProjeto->getEmailUsuarioProj());
 
-$inicio = $tmpProjeto->getInicio();
-$fim = $tmpProjeto->getFim();
+$inicio = $tmpProjeto->getInicioProj();
+$fim = $tmpProjeto->getFimProj();
 ?>
 <html>
     <head>
@@ -54,15 +54,15 @@ $fim = $tmpProjeto->getFim();
                     <div class="card">
                         <div class="card-header bg-primary-dark text-white">
                             <h5><i class="fa fa-file-text fa-lg fa-fw text-white"></i>
-                                <?= $tmpProjeto->getNome(); ?> </h5>                       
+                                <?= $tmpProjeto->getNomeProj(); ?> </h5>                       
                         </div>
                         <div class="card-body">
                             <h5>
                                 <i class="fa fa-user fa-fw fa-lg"></i>
-                                <?=$texto[$lang]['text_coord'];?>: <?= $tmpUsuario->getNome(); ?>
+                                <?=$texto[$lang]['text_coord'];?>: <?= $tmpUsuario->getNomeUsu(); ?>
                             </h5>
                             <br>
-                            <?= $tmpProjeto->getDescricao(); ?>
+                            <?= $tmpProjeto->getDescricaoProj(); ?>
                         </div>                               
                     </div>
                 </div>
@@ -111,7 +111,7 @@ $fim = $tmpProjeto->getFim();
                             } else {
                                 for ($i = 0; $i < count($itens); $i++) {
                                     ?>
-                                    <?= $itens[$i]->getNome(); ?><br>
+                                    <?= $itens[$i]->getNomeUsu(); ?><br>
                                     <?php
                                 }
                             }
@@ -147,11 +147,11 @@ $fim = $tmpProjeto->getFim();
 
                     <div class="float-left">
                         <i class="fa fa-calendar fa-fw fa-sm"></i>
-                        <?= ProjetosDAO::corrigirData($tmpProjeto->getInicio()); ?>
+                        <?= ProjetosDAO::corrigirData($tmpProjeto->getInicioProj()); ?>
                     </div>
                     <div class="float-right">     
                         <i class="fa fa-calendar fa-fw fa-sm"></i>
-                        <?= ProjetosDAO::corrigirData($tmpProjeto->getFim()); ?>
+                        <?= ProjetosDAO::corrigirData($tmpProjeto->getFimProj()); ?>
                     </div>
                     <br><br>
                     <div class="card">
@@ -162,7 +162,7 @@ $fim = $tmpProjeto->getFim();
                                     <?=$texto[$lang]['card_tasks'];?>
                                 </div>
                                 <div class="col-md-1" style="padding-top:3px;">
-                                    <a href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigo(); ?>">
+                                    <a href="FormCadastroTarefaUI.php?cod=<?= $tmpProjeto->getCodigoProj(); ?>">
                                         <i class="fa fa-plus-square fa-lg fa-fw text-white"></i>
                                     </a>
                                 </div>

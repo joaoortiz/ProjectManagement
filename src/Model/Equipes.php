@@ -1,38 +1,38 @@
 <?php
 
 class Equipes {
-    private $emailUsuario, $codigoTarefa, $codigoProjeto, $codigoPermissao;
+    private $emailUsuarioEq, $codigoTarefaEq, $codigoProjetoEq, $codigoPermissaoEq;
     
-    function getEmailUsuario() {
-        return $this->emailUsuario;
+    public function getEmailUsuarioEq() {
+        return $this->emailUsuarioEq;
     }
 
-    function getCodigoTarefa() {
-        return $this->codigoTarefa;
+    public function getCodigoTarefaEq() {
+        return $this->codigoTarefaEq;
     }
 
-    function getCodigoProjeto() {
-        return $this->codigoProjeto;
+    public function getCodigoProjetoEq() {
+        return $this->codigoProjetoEq;
     }
 
-    function getCodigoPermissao() {
-        return $this->codigoPermissao;
+    public function getCodigoPermissaoEq() {
+        return $this->codigoPermissaoEq;
     }
 
-    function setEmailUsuario($emailUsuario) {
-        $this->emailUsuario = $emailUsuario;
+    public function setEmailUsuarioEq($emailUsuarioEq) {
+        $this->emailUsuarioEq = $emailUsuarioEq;
     }
 
-    function setCodigoTarefa($codigoTarefa) {
-        $this->codigoTarefa = $codigoTarefa;
+    public function setCodigoTarefaEq($codigoTarefaEq) {
+        $this->codigoTarefaEq = $codigoTarefaEq;
     }
 
-    function setCodigoProjeto($codigoProjeto) {
-        $this->codigoProjeto = $codigoProjeto;
+    public function setCodigoProjetoEq($codigoProjetoEq) {
+        $this->codigoProjetoEq = $codigoProjetoEq;
     }
 
-    function setCodigoPermissao($codigoPermissao) {
-        $this->codigoPermissao = $codigoPermissao;
+    public function setCodigoPermissaoEq($codigoPermissaoEq) {
+        $this->codigoPermissaoEq = $codigoPermissaoEq;
     }
 
 
