@@ -12,7 +12,7 @@ class UsuariosDAO {
         $vConn = ConexaoDAO::abrirConexao();
         $email = $tmpUsuario->getEmailUsu();
 
-        $sqlVerifica = "Select * from Usuarios where email_USUARIO like '$email'";
+        $sqlVerifica = "Select * from usuarios where email_USUARIO like '$email'";
         $rsVerifica = mysqli_query($vConn, $sqlVerifica) or die(mysqli_error($vConn));
 
         if (mysqli_num_rows($rsVerifica) > 0) {
@@ -69,7 +69,7 @@ class UsuariosDAO {
     public static function listarIntegrantes($tmpCodigo) {
         $vConn = ConexaoDAO::abrirConexao();
 
-        $sqlInteg = "Select U.* from USUARIOS U, EQUIPES E ";
+        $sqlInteg = "Select U.* from usuarios U, equipes E ";
         $sqlInteg .= "where E.codigoProjeto_EQUIPE = '$tmpCodigo' ";
         $sqlInteg .= "and E.emailUsuario_EQUIPE = U.email_USUARIO";
 
@@ -102,19 +102,19 @@ class UsuariosDAO {
     public static function adicionarIntegrante($tmpProjeto, $tmpEmail) {
         $vConn = ConexaoDAO::abrirConexao();
 
-        $sqlVerifica = "Select * from Usuarios where email_USUARIO like '$tmpEmail'";
+        $sqlVerifica = "Select * from usuarios where email_USUARIO like '$tmpEmail'";
         $rsVerifica = mysqli_query($vConn, $sqlVerifica) or die(mysqli_error($vConn));
 
         if (mysqli_num_rows($rsVerifica) == 0) {
             return 0;
         } else {
-            $sqlVerEquip = "Select * from Equipes where emailUsuario_EQUIPE like '$tmpEmail' and codigoProjeto_EQUIPE = '$tmpProjeto'";
+            $sqlVerEquip = "Select * from equipes where emailUsuario_EQUIPE like '$tmpEmail' and codigoProjeto_EQUIPE = '$tmpProjeto'";
             $rsVerEquip = mysqli_query($vConn, $sqlVerEquip) or die(mysqli_error($vConn));
 
             if (mysqli_num_rows($rsVerEquip) > 0) {
                 return -1;
             } else {
-                $sqlAdd = "Insert into Equipes(codigoProjeto_EQUIPE, emailUsuario_EQUIPE, codigoPermissao_EQUIPE) values (";
+                $sqlAdd = "Insert into equipes(codigoProjeto_EQUIPE, emailUsuario_EQUIPE, codigoPermissao_EQUIPE) values (";
                 $sqlAdd .= "'$tmpProjeto','$tmpEmail',2)";
 
                 mysqli_query($vConn, $sqlAdd) or die(mysqli_error($vConn));
@@ -127,7 +127,7 @@ class UsuariosDAO {
     public static function consultarUsuario($tmpEmail) {
         $vConn = ConexaoDAO::abrirConexao();
 
-        $sqlUsuario = "Select * from Usuarios where email_USUARIO like '$tmpEmail'";
+        $sqlUsuario = "Select * from usuarios where email_USUARIO like '$tmpEmail'";
         $rsUsuario = mysqli_query($vConn, $sqlUsuario) or die(mysqli_error($vConn));
 
         $tmpUsuario = new Usuarios();

@@ -100,7 +100,7 @@ $fim = $tmpProjeto->getFimProj();
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body text-center" style="min-height:220px;height:auto;">
+                        <div class="card-body" style="min-height:220px;height:auto;">
                             <?php
                             $itens = UsuariosDAO::listarIntegrantes($proj);
 
@@ -111,6 +111,7 @@ $fim = $tmpProjeto->getFimProj();
                             } else {
                                 for ($i = 0; $i < count($itens); $i++) {
                                     ?>
+                                    <i class="fa fa-user fa-lg fa-fw"></i>
                                     <?= $itens[$i]->getNomeUsu(); ?><br>
                                     <?php
                                 }

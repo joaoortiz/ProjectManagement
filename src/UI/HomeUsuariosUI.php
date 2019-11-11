@@ -60,7 +60,7 @@ require_once "../DAO/TarefasDAO.php";
                         </div>
                         <div class="card-body">
 
-                            <img src="img/user.png" class="float-left">
+                            <img src="../../img/user.png" class="float-left">
                             <h4><?= $_SESSION['nome']; ?></h4>
                             <?= $_SESSION['email']; ?><br>
                             <?= $_SESSION['telefone']; ?><br>

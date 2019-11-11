@@ -1,3 +1,8 @@
+<?php
+
+include "../../assets/php/lang.php";
+$texto = translatePg();
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,28 +16,28 @@
                 <div class="col-md-6 border"style="margin-top:100px;">
                     <form action="../Control/UsuariosControl.php" method="post">
                         <p>
-                            Preencha corretamente os dados abaixo para efetuar o cadastro no sistema
+                            <?=$texto[$lang]['text_caduser'];?>
                         </p>
 
                         <div class="form-group">
-                            <input type="text" name="HTML_nome" placeholder="Nome Completo" class="form-control">
+                            <input type="text" name="HTML_nome" placeholder="<?=$texto[$lang]['pholder_username'];?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="HTML_email" placeholder="Digite seu e-mail" class="form-control">
+                            <input type="text" name="HTML_email" placeholder="<?=$texto[$lang]['pholder_email'];?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="HTML_senha" placeholder="Digite sua senha" class="form-control">
+                            <input type="password" name="HTML_senha" placeholder="<?=$texto[$lang]['pholder_pass'];?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="HTML_confsenha" placeholder="Confirme a senha" class="form-control">
+                            <input type="password" name="HTML_confsenha" placeholder="<?=$texto[$lang]['pholder_confpass'];?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="number" name="HTML_telefone" placeholder="Telefone (apenas números)" class="form-control">
+                            <input type="number" name="HTML_telefone" placeholder="<?=$texto[$lang]['pholder_phone'];?>" class="form-control">
                         </div>
 
                         <div class="form-group" style="text-align:right;">
                             <input type = "hidden" name="acao" value="2">
-                            <button type="submit" class="btn btn-primary">Cadastrar Dados</button> 
+                            <button type="submit" class="btn btn-primary"><?=$texto[$lang]['btn_register'];?></button> 
                         </div>
                     </form>
                 </div>

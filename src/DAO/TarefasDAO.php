@@ -9,7 +9,7 @@ class TarefasDAO {
     public static function cadastrarTarefa($tmpTarefa) {
         $vConn = ConexaoDAO::abrirConexao();
 
-        $sqlCadTar = "Insert into TAREFAS(";
+        $sqlCadTar = "Insert into tarefas(";
         $sqlCadTar .= "nome_TAREFA, descricao_TAREFA,";
         $sqlCadTar .= "data_TAREFA, status_TAREFA,";
         $sqlCadTar .= "emailUsuario_TAREFA, codigoProjeto_TAREFA)";
@@ -85,6 +85,7 @@ class TarefasDAO {
         $tmpTarefa->setEmailUsuarioTar($tblTar['emailUsuario_TAREFA']);
         $tmpTarefa->setNomeUsuarioTar($tblTar['nome_USUARIO']);
         $tmpTarefa->setNomeProj($tblTar['nome_PROJETO']);
+        $tmpTarefa->setEmailUsuarioProj($tblTar['emailUsuario_PROJETO']);
 
 
         return $tmpTarefa;
@@ -93,7 +94,7 @@ class TarefasDAO {
     public static function alterarStatus($tmpCodigo) {
         $vConn = ConexaoDAO::abrirConexao();
 
-        $sqlTar = "Select * from TAREFAS where codigo_TAREFA = $tmpCodigo";
+        $sqlTar = "Select * from tarefas where codigo_TAREFA = $tmpCodigo";
         $rsTar = mysqli_query($vConn, $sqlTar) or die(mysqli_error($vConn));
         $tblTar = mysqli_fetch_array($rsTar);
         $status = $tblTar['status_TAREFA'];
@@ -104,7 +105,7 @@ class TarefasDAO {
             $novoStatus = 1;
         }
 
-        $sqlStTar = "Update TAREFAS set status_TAREFA = '$novoStatus' where codigo_TAREFA = '$tmpCodigo'";
+        $sqlStTar = "Update tarefas set status_TAREFA = '$novoStatus' where codigo_TAREFA = '$tmpCodigo'";
         mysqli_query($vConn, $sqlStTar) or die(mysqli_error($vConn));
     }
 
@@ -118,8 +119,19 @@ class TarefasDAO {
     
     public static function excluirArquivo($tmpCodigo) {
         $vConn = ConexaoDAO::abrirConexao();
-        $sqlArquivo = "Delete from Arquivos where codigo_ARQUIVO = '$tmpCodigo'";
+        $sqlArquivo = "Delete from arquivos where codigo_ARQUIVO = '$tmpCodigo'";
         mysqli_query($vConn, $sqlArquivo) or die(mysqli_error($vConn));
+    }
+    
+    public static function excluirTarefa($tmpCodigo){
+        $vConn = ConexaoDAO::abrirConexao();
+        
+        $sqlDelArq = "Delete from arquivos where codigoTarefa_ARQUIVO = '$tmpCodigo'";
+        mysqli_query($vConn, $sqlDelArq) or die(mysqli_error($vConn));
+        
+        $sqlDelTar = "Delete from tarefas where codigo_TAREFA = '$tmpCodigo'";
+        mysqli_query($vConn, $sqlDelTar) or die(mysqli_error($vConn));
+                
     }
     
     public static function pegarUltimoArquivo($tmpTarefa){

@@ -15,8 +15,11 @@ $texto = translatePg();
     <body>   
 
         <div class="container">
+            <div class="col-md-12 text-center">
+                <img src="img/banner.png">
+            </div>
             <center>
-                <div class="col-md-5 border" style="margin-top:150px;">
+                <div class="col-md-5 border" style="margin-top:50px;">
                     <form action="src/Control/UsuariosControl.php" method="post">
                         <p><?=$texto[$lang]['text_login'];?></p>
 

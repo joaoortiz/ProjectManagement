@@ -15,7 +15,8 @@ require_once "../DAO/UsuariosDAO.php";
 $proj = $_GET['proj'];
 $tar = $_GET['tar'];
 $tmpTarefa = TarefasDAO::consultarTarefa($tar);
-$adm = $tmpTarefa->getEmailUsuarioTar();
+$adm = $tmpTarefa->getEmailUsuarioProj();
+$resp = $tmpTarefa->getEmailUsuarioTar();
 $tmpAdm = UsuariosDAO::consultarUsuario($adm);
 $itens = TarefasDAO::listarArquivos($tar);
 
@@ -54,21 +55,28 @@ if ($tmpTarefa->getStatusTar() == 0) {
                                 <?= $tmpTarefa->getNomeTar(); ?> - <?= ProjetosDAO::corrigirData($tmpTarefa->getDataTar()); ?> </h5>                       
                         </div>
                         <div class="card-body">
+                            
+                            <a href="../Control/TarefasControl.php?acao=4&proj=<?=$proj?>&tar=<?=$tar?>" class="btn btn-danger text-white float-right" style="width:200px;">
+                                <i class="fa fa-trash fa-lg"></i>
+                                <?=$texto[$lang]['btn_deltask']?>
+                            </a>
 
                             <?= $tmpTarefa->getDescricaoTar(); ?><br>
                             Status: <b><?= $status; ?></b><br>
+                            
                             <?php
-                            if ($adm == $_SESSION['email']) {
+                            
+                            if ($tmpTarefa->getEmailUsuarioProj() == $_SESSION['email']) {
 
                                 if ($tmpTarefa->getStatusTar() == 0) {
                                     ?>
-                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white">
+                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white" style="width:200px;">
                                         <i class="fa fa-thumbs-up fa-fw fa-lg"></i>
                                         <?= $texto[$lang]['btn_finish']; ?>
                                     </a>
                                 <?php } else { ?>
 
-                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white">
+                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white" style="width:200px;">
                                         <i class="fa fa-thumbs-down fa-fw fa-lg"></i>
                                         <?= $texto[$lang]['btn_reopen']; ?>
                                     </a>
@@ -150,10 +158,11 @@ if ($tmpTarefa->getStatusTar() == 0) {
                                             <div class="col-md-2" style="text-align:center;">
                                                 <i class="fa fa-file-o fa-2x"></i>
                                                 
+                                                <?php if ($tmpTarefa->getEmailUsuarioTar() == $_SESSION['email']) { ?>
                                                 <a href="../Control/ArquivosControl.php?proj=<?=$proj?>&tar=<?=$tar?>&acao=2&arq=<?=$itens[$i]->getCodigoArq();?>">
                                                     <i class="fa fa-times-circle fa-sm" style="color:red;position:absolute;left:20px;top:-8px;"></i>
                                                 </a>
-                                                
+                                                <?php } ?>
                                                 <br>
                                                 <a href="../../files/<?= $tmpTarefa->getCodigoTar(); ?>/<?= $itens[$i]->getNomeArq(); ?>" target="_blank">
                                                     <font style="font-size:10pt;">
