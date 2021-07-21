@@ -6,8 +6,8 @@ $_SESSION['lang'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 $lang = $_SESSION['lang'];
 
 function translatePg() {
-    $varArray = [
-        "pt" => ["title" => "Sistema de Gerenciamento de Projetos",
+    $varArray = array(
+        "pt" => array("title" => "Sistema de Gerenciamento de Projetos",
             "text_login" => "Preencha os campos abaixo para acessar o sistema.",
             "text_caduser" => "Preencha os campos abaixo para efetuar o cadastro.",
             "text_cadproj" => "Informe os dados do Projeto.",
@@ -64,9 +64,8 @@ function translatePg() {
             "btn_send" => "Enviar",
             "card_addmember" => "Adicionar Integrante",
             "text_addmember" => "Insira o e-mail do usuário para integrá-lo ao projeto"
-        ],
-        
-        "en" => ["title" => "Project Management System",
+        ),
+        "en" => array("title" => "Project Management System",
             "text_login" => "Please, fill the informations bellow to access the system.",
             "text_caduser" => "Please, fill the informations bellow to register your account.",
             "text_cadproj" => "Fill the fields bellow with the project informations.",
@@ -123,8 +122,8 @@ function translatePg() {
             "btn_send" => "Send",
             "card_addmember" => "Add member",
             "text_addmember" => "Insert a active user e-mail address to include in team"
-        ]
-    ];
+        )
+    );
 
     return $varArray;
 }

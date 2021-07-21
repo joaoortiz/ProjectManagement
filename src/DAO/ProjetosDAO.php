@@ -130,9 +130,11 @@ class ProjetosDAO {
         $dtFinal = new DateTime($tmpFim);
         $dtHoje = new DateTime(date('Y-m-d'));
         
-        $rest = $dtFinal->diff($dtHoje)->days;
+        if($dtHoje > $dtFinal) $rest = 0;
+        else $rest = $dtFinal->diff($dtHoje)->days;
         
         return $rest;
+        
         
     }
 

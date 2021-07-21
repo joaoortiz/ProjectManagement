@@ -55,12 +55,15 @@ if ($tmpTarefa->getStatusTar() == 0) {
                                 <?= $tmpTarefa->getNomeTar(); ?> - <?= ProjetosDAO::corrigirData($tmpTarefa->getDataTar()); ?> </h5>                       
                         </div>
                         <div class="card-body">
+                              <?php
                             
+                            if ($tmpTarefa->getEmailUsuarioProj() == $_SESSION['email']) {
+?>
                             <a href="../Control/TarefasControl.php?acao=4&proj=<?=$proj?>&tar=<?=$tar?>" class="btn btn-danger text-white float-right" style="width:200px;">
                                 <i class="fa fa-trash fa-lg"></i>
                                 <?=$texto[$lang]['btn_deltask']?>
                             </a>
-
+                            <?php } ?>
                             <?= $tmpTarefa->getDescricaoTar(); ?><br>
                             Status: <b><?= $status; ?></b><br>
                             
@@ -70,13 +73,13 @@ if ($tmpTarefa->getStatusTar() == 0) {
 
                                 if ($tmpTarefa->getStatusTar() == 0) {
                                     ?>
-                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white" style="width:200px;">
+                                    <a href="../Control/TarefasControl.php?proj=<?= $proj; ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white" style="width:200px;">
                                         <i class="fa fa-thumbs-up fa-fw fa-lg"></i>
                                         <?= $texto[$lang]['btn_finish']; ?>
                                     </a>
                                 <?php } else { ?>
 
-                                    <a href="../Control/TarefasControl.php?proj=<?= $tmpTarefa->getCodigoProj(); ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white" style="width:200px;">
+                                    <a href="../Control/TarefasControl.php?proj=<?= $proj; ?>&tar=<?= $tmpTarefa->getCodigoTar(); ?>&acao=3" class="btn btn-warning float-right text-white" style="width:200px;">
                                         <i class="fa fa-thumbs-down fa-fw fa-lg"></i>
                                         <?= $texto[$lang]['btn_reopen']; ?>
                                     </a>
@@ -190,7 +193,7 @@ if ($tmpTarefa->getStatusTar() == 0) {
                                                 </div>
                                             </div><br>
                                             <div class="form-group">
-                                                <input type="hidden" name="codProjeto" value="<?= $tmpTarefa->getCodigoProjetoTar(); ?>">
+                                                <input type="hidden" name="codProjeto" value="<?=$tmpTarefa->getCodigoProj();?>">
                                                 <input type="hidden" name="codTarefa" value="<?= $tmpTarefa->getCodigoTar(); ?>">
                                                 <button type="submit" class="btn btn-primary float-right"><?= $texto[$lang]['btn_send']; ?></button>
                                             </div>

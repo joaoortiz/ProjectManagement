@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/PHP/ProjectManagement/src/UI/MenuTopoUI.php</file>
+            <file>file:/D:/PHP/ProjectManagement/src/UI/Help/Help.php</file>
+            <file>file:/D:/PHP/ProjectManagement/index.php</file>
+            <file>file:/D:/PHP/ProjectManagement/src/Model/Topicos.php</file>
+            <file>file:/D:/PHP/ProjectManagement/src/Model/Perguntas.php</file>
+            <file>file:/D:/PHP/ProjectManagement/src/DAO/PerguntasDAO.php</file>
+            <file>file:/D:/PHP/ProjectManagement/src/UI/Help/FormCadastroPerguntaUI.php</file>
+            <file>file:/D:/PHP/ProjectManagement/src/UI/Help/CadastroPergunta.php</file>
+        </group>
     </open-files>
 </project-private>

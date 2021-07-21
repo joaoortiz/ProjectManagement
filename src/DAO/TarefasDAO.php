@@ -85,6 +85,7 @@ class TarefasDAO {
         $tmpTarefa->setEmailUsuarioTar($tblTar['emailUsuario_TAREFA']);
         $tmpTarefa->setNomeUsuarioTar($tblTar['nome_USUARIO']);
         $tmpTarefa->setNomeProj($tblTar['nome_PROJETO']);
+        $tmpTarefa->setCodigoProj($tblTar['codigoProjeto_TAREFA']);
         $tmpTarefa->setEmailUsuarioProj($tblTar['emailUsuario_PROJETO']);
 
 
